@@ -1,0 +1,25 @@
+.checkbox-wrap{
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    cursor:pointer;
+
+    &.disable{
+        pointer-events: none;
+    }
+
+    .checkbox{
+        display: flex;
+        width: 24px;
+        height: 24px;
+    }
+
+    .label{
+        line-height: 24px;
+        margin-left: 6px;
+        display: flex;
+        font-size: 12px;
+        font-weight: 500;
+        color:white;
+    }
+}

@@ -1,0 +1,53 @@
+@import "utils";
+
+.btn-wrap{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    user-select:none;
+    cursor:pointer;
+    position: relative;
+    white-space: nowrap;
+    font-size:16px;
+    font-weight: bold;
+
+    .btn-icon{
+        width:24px;
+        height:24px;
+        left:0;
+        margin-left: 24px;
+        position:absolute;
+    }
+
+    &.disable, &.loading{
+        cursor: default;
+    }
+
+    @keyframes spinner {
+        to{
+            transform: rotate(360deg);
+        }
+    }
+
+    .loading-wrap{
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .loading-progress{
+            width:30px;
+            height:30px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: $primary-color;
+            border-right-color: $primary-color;
+            border-bottom-color: $primary-color;
+            animation: spinner .8s linear infinite;
+        }
+    }
+}

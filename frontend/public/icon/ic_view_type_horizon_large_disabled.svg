@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_view_type_horizon_large_disabled</title>
+    <g id="Symbol" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_view_type_horizon_large_disabled">
+            <polygon id="Path" points="0 0 18 0 18 18 0 18"></polygon>
+            <polygon id="Path" fill="#4A4A4A" fill-rule="nonzero" transform="translate(16.125000, 9.000000) scale(-1, 1) translate(-16.125000, -9.000000) " points="15.375 3.75 16.875 3.75 16.875 14.25 15.375 14.25"></polygon>
+            <path d="M12.9464286,3.75 C13.4571429,3.75 13.875,4.0875 13.875,4.5 L13.875,4.5 L13.875,13.5 C13.875,13.9125 13.4571429,14.25 12.9464286,14.25 L12.9464286,14.25 L1.80357143,14.25 C1.29285714,14.25 0.875,13.9125 0.875,13.5 L0.875,13.5 L0.875,4.5 C0.875,4.0875 1.29285714,3.75 1.80357143,3.75 L1.80357143,3.75 Z M6.7542261,5 L5.2,5 L5.2,12.6261869 L9.8,12.6261869 L9.8,11.2482436 L6.75396364,11.2476364 L6.7542261,5 Z" id="Combined-Shape" fill="#4A4A4A" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

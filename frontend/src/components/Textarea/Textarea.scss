@@ -1,0 +1,19 @@
+@import "utils";
+
+.text-area-wrap{
+    .text-area{
+        height: auto;
+        min-height: 64px;
+        padding:5px 12px;
+        border: 1px solid #a0aec0; 
+        overflow: hidden;
+        border-radius: 0;
+        resize: none;
+        font-size:large;
+        outline-style: none;
+
+        &:focus{
+            border-color: #df86ff;
+        }
+    }
+}

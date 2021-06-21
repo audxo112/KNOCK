@@ -1,0 +1,65 @@
+.editor-user-register-template{
+    padding: 0 150px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .editor-user-group-form{
+        margin-top:108px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .control{
+        height: 60px;
+        padding: 5px;
+        margin-top: -84px;
+        top:0;
+        right: 0;
+        display: flex;
+        position: absolute;
+    }
+
+    .list-pannel{
+        min-width: 200px;
+        width: 200px;
+    }
+
+    .content-pannel{
+        min-width: 910px;
+        width:910px;
+        margin-left: 30px;
+    }
+
+    .register-pannel{
+        display: flex;
+        flex-direction: row;
+
+        .primary-pannel{
+            min-width: 360px;
+            width:360px;
+        }
+
+        .secondary-pannel{
+            min-width: 240px;
+            width:240px;
+            margin-left: 110px;
+            margin-right: 200px;
+        }
+    }
+
+    .horizontal-divider{
+        height: 1px;
+        margin-top:50px;
+        display: flex;
+        background-color: #242424;
+    }
+
+    .search-form{
+        margin-top:23px;
+        min-width: 360px;
+        width: 360px;
+    }
+}

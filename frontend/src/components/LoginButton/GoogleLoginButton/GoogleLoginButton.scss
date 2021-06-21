@@ -1,0 +1,53 @@
+@import "utils";
+
+.google-button-wrap{
+    width:250px;
+    height:50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    cursor: pointer;
+
+    @keyframes spinner {
+        to{
+            transform: rotate(360deg);
+        }
+    }
+
+    .loading-wrap{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .loading-progress{
+            width:30px;
+            height:30px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: $primary-color;
+            border-right-color: $primary-color;
+            border-bottom-color: $primary-color;
+            animation: spinner .8s linear infinite;
+        }
+    }
+
+    .icon{
+        width: 30px;
+        height: 30px;
+        padding: 3px;
+    }
+
+    .text{
+        width:168px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        font-size:16px;
+        font-weight: bold;
+        color:#000000;
+    } 
+}

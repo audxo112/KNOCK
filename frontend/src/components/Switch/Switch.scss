@@ -1,0 +1,64 @@
+.switch-input-wrap{
+    display: flex;
+    flex-direction: column;
+}
+
+.switch-wrap{
+    width: 39px;
+    height: 21px;
+    margin-top: 11px;
+    margin-left: 6px;
+    align-items: center;
+    display: inline-flex;
+    position: relative;
+    cursor: pointer;
+
+    .switch-bg{
+        width: 39px;
+        height: 21px;
+        border-radius: 39px;
+        border: 2px solid #979797;
+        display: flex;
+        transition: 0.2s;
+    }
+
+    .switch{
+        margin: 0;
+        height: 0;
+        width: 0;
+        visibility: hidden;
+    }
+    
+    .switch-button{
+        width: 12px;
+        height: 12px;
+        left: 3px;
+        right: inherit;
+        border-radius: 12px;
+        position: absolute;
+        background: #979797;
+        transition: 0.2s;
+    }
+    
+    .switch:checked ~ .switch-button {
+        margin-left: calc(100% - 6px);
+        transform: translateX(-100%);
+        background: white;
+    }
+
+    .switch:checked ~ .switch-bg{
+        border: 2px solid #c86de9;
+        background: #c86de9;
+    }
+
+    &:active{
+        .switch-button{
+            width: 16px;
+        }
+    }
+
+    &.disable{
+        pointer-events:none;
+    }
+}
+

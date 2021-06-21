@@ -1,0 +1,62 @@
+@import "utils";
+
+.frame-upload-template{
+    padding: 0 150px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .header{
+        width:1160px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .control{
+            margin-top:24px;
+            padding:5px;
+            display: flex;
+            flex-direction: row;
+        }
+    }
+
+    .frame-form{
+        display: flex;
+        flex-direction: row;
+        margin-top: 24px;
+    }
+
+    .primary-pannel{
+        min-width: 200px;
+        width: 200px;
+        height: 100%;
+        margin-right: 50px;
+        position: relative;
+    }
+
+    .secondary-pannel{
+        width: 360px;
+        min-width: 240px;
+        height:auto;
+        margin-right: 45px;
+        display:flex;
+        flex-direction: column;
+
+        .title-pos{
+            margin-top:24px;
+        }
+
+        .scale-type-pos{
+            margin-top:24px;
+        }
+
+        .repeat-mode-pos{
+            margin-top:24px;
+        }
+    }   
+
+    .large-frame{
+        margin-right: 15px;
+    }
+}

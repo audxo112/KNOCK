@@ -1,0 +1,103 @@
+@import "utils";
+
+.checkable-text-input-wrap{
+    width:100%;
+
+    .input-wrap{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        position: relative;
+
+        input{
+            width: 100%;
+            height: 40px;
+            padding: 0px 48px 0 16px;
+            border-radius: 6px; 
+            border: 1px solid #303030; 
+            outline-style: none;
+            box-sizing: border-box;
+            background-color: #242424;
+            font-size: 14px;
+            font-weight: 500;
+            color:white;
+            caret-color:#df86ff;
+
+            &::placeholder{
+                color:#525252;
+            }
+
+            &.disable{
+                pointer-events:none;
+            }
+
+            &.show-remain-text{
+                padding-right:94px;
+            }
+
+            &:focus{
+                border-color:#df86ff;
+            }
+
+            &.check-failed{
+                border: 1px solid #ff5a5a;
+            }
+        }
+
+        .remain-text{
+            height:40px;
+            line-height: 40px;
+            right: 48px;
+            position: absolute;
+            font-size: 14px;
+            font-weight: 500;
+            color:white;
+
+            &.disable{
+                color:#525252;
+            }
+        }
+
+        .icon-wrap{
+            width:40px;
+            height:40px;
+            right: 4px;
+            position: absolute;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .message-wrap{
+        position:absolute;
+        top:100%;
+        left: 0;
+        margin-top: 4px;
+        margin-left: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        color:#ff5a5a;
+    }
+
+    .loading-wrap{
+        width:40px;
+        height:40px;
+        right: 4px;
+        position: absolute;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+
+        .loading-progress{
+            width:25px;
+            height:25px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: $primary-color;
+            border-right-color: $primary-color;
+            border-bottom-color: $primary-color;
+            animation: spinner .8s linear infinite;
+        }
+    }
+}

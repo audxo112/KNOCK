@@ -1,0 +1,156 @@
+@import "utils";
+
+.user-selector-wrap{
+    width: 100%;
+    position: relative;
+
+    &.disable{
+        pointer-events:none;
+    }
+
+    .user-selector-wrap{
+        width:100%;
+        display: flex;
+        position: relative;
+        border-radius: 6px;
+        background-color:#242424;
+    }
+
+    .user-selector-current{
+        width: 100%;
+        height: 60px;
+        padding: 0px 55px 0px 16px;
+        border: 1px solid #303030; 
+        border-radius: 6px;
+        box-sizing: border-box;
+        position:relative;
+        user-select: none;
+        display: flex;
+        align-items: center;
+
+        
+        &.open{
+            border-color:#df86ff;
+        }
+        &:hover{
+            background:rgba($color: #575757, $alpha: 0.5)
+        }
+        &:active{
+            background:#282828
+        }
+
+        .user-nickname{
+            line-height: 60px;
+            margin-left: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color:white;
+    
+            &.placeholder{
+                color:#525252;
+            }
+        }
+    }
+
+    .user-selector-open-icon{
+        width:18px;
+        height:18px;
+        margin-right: 21px;
+        right:0;
+        position:absolute;
+        object-fit: contain;
+    }
+
+    .user-selector-list-wrap{
+        width: 100%;
+        padding:1px;
+        position: absolute;
+        top: 60px;
+        border-radius: 6px;
+        border: solid 1px #d86cff;
+        background-color:#242424;
+        z-index: 2;
+    }
+
+    .user-selector-list{
+        width: 100%;
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 6px;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            background-color: #323232;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: white;
+        }
+
+        &::-webkit-scrollbar-button {
+            width: 0;
+            height: 0;
+        }
+    }
+
+    .avatar-wrap{
+        width:32px;
+        height:32px;
+        display: flex;
+
+        img[src=""]{
+            display: none;
+        }
+
+        .avatar{
+            width:100%;
+            height:100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .avatar-default{
+            width:100%;
+            height:100%;
+            border-radius: 50%;
+            border:1px solid #979797;
+            background-color: #d8d8d8; 
+        }
+    }
+
+    .user-selector-item{
+        width: 100%;
+        height: 60px;
+        padding: 0px 16px;
+        user-select: none;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+
+        &:hover, &.selected{
+            background:rgba($color: #575757, $alpha: 0.5)
+        }
+        &:active{
+            background:#282828
+        }
+
+        .user-nickname{
+            line-height: 60px;
+            margin-left: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color:white;
+        }
+    }
+    
+    .user-selector-item + .user-selector-item{
+        border-top: 1px solid #303030; 
+    }
+}

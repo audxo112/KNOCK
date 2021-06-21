@@ -1,0 +1,45 @@
+@import "utils";
+
+.date-period-wrap{
+    width: 100%;
+
+    .input-wrap{
+        display: flex;
+        align-items: center;
+
+        .input{
+            height: 40px;
+            padding: 0px 12px 0 16px;
+            border: solid 1px #303030;
+            border-radius: 6px; 
+            background-color: #242424;
+            outline-style: none;
+            font-size: 14px;
+            font-weight: 500;
+            color:#525252;
+
+            &:focus{
+                border: solid 1px #df86ff;
+            }
+
+            &::-webkit-calendar-picker-indicator{
+                width: 18px;
+                height:18px;
+                background-image:url("ic_calender.svg");
+                color: rgba($color: #000000, $alpha: 0);
+                outline-style: none;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .hyphen{
+        width:16px;
+        height:2px;
+        padding: 0 8px;
+        margin-left:2px;
+        margin-right:2px;
+        border-radius: 1px;
+        background-color:#525252;
+    }
+}

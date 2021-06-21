@@ -1,0 +1,49 @@
+.curation-group-edit-template{
+    padding: 0 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .control { 
+        height: 60px;
+        padding: 5px;
+        margin-top: -84px;
+        top:0;
+        right:0;
+        display: flex;
+        position: absolute;
+
+        .delete{
+            margin-right:12px;
+        }
+    }
+
+    .curation-group-form{
+        margin-top:108px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .primary-pannel{
+        min-width: 200px;
+        width:200px;
+    }
+
+    .secondary-pannel{
+        min-width: 360px;
+        width:360px;
+        margin-left: 50px;
+
+        .post-date{
+            margin-top:24px;
+        }
+    }
+
+    .third-pannel{
+        min-width: 362px;
+        width: 362px;
+        margin-left: 50px;
+    }
+}

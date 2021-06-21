@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_view_type_horizon_album_enabled</title>
+    <g id="Symbol" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_view_type_horizon_album_enabled">
+            <polygon id="Path" points="0 0 18 0 18 18 0 18"></polygon>
+            <path d="M2,3.8 L3.2,3.8 L3.2,14.3 L2,14.3 L2,3.8 Z M4.2,3.8 L5.4,3.8 L5.4,14.3 L4.2,14.3 L4.2,3.8 Z M15.6857143,3.8 L7.11428571,3.8 C6.72142857,3.8 6.4,4.1375 6.4,4.55 L6.4,13.55 C6.4,13.9625 6.72142857,14.3 7.11428571,14.3 L15.6857143,14.3 C16.0785714,14.3 16.4,13.9625 16.4,13.55 L16.4,4.55 C16.4,4.1375 16.0785714,3.8 15.6857143,3.8 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero" transform="translate(9.200000, 9.050000) scale(-1, 1) translate(-9.200000, -9.050000) "></path>
+        </g>
+    </g>
+</svg>

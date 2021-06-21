@@ -1,0 +1,9 @@
+.tooltip-container{
+    width: auto;
+    position: relative;
+
+    .tooltip-content{
+        z-index: 999;
+        position: fixed;
+    }
+}

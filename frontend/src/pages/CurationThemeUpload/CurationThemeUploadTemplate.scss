@@ -1,0 +1,47 @@
+.curation-theme-upload-template{
+    padding: 0 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .template-header{
+        width: 1160px;
+        height: 60px;
+        margin-top: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .search-input{
+            margin-left: 10px;
+            margin-right: 10px;
+            flex-grow: 1;
+        }
+
+        .control{
+            padding:5px;
+            display: flex;
+            flex-direction: row;
+        }
+    }
+
+    .upload-form{
+        width: 1160px;
+        margin-top:12px;
+        display: flex;
+        flex-direction: row;
+
+        .group-list-pos{
+            width:390px;
+            height:640px;
+        }
+
+        .theme-list-pos{
+            width: 750px;
+            height: 720px;
+            margin-left: 20px;
+        }
+    }
+}

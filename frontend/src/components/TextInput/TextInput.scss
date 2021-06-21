@@ -1,0 +1,110 @@
+@import "utils";
+
+.text-input-wrap{
+    width: 100%;
+
+    .input-wrap{
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        box-sizing: border-box;
+    
+        input{
+            width: 100%;
+            height: 40px;
+            padding: 0px 16px;
+            border-radius: 6px; 
+            border: 1px solid #303030; 
+            outline-style: none;
+            box-sizing: border-box;
+            background-color: #242424;
+            font-size: 14px;
+            font-weight: 500;
+            color:white;
+            caret-color:#df86ff;
+
+            &::placeholder{
+                color:#525252;
+            }
+
+            &.disable{
+                pointer-events:none;
+            }
+
+            &.show-remain-text{
+                padding-right:64px;
+            }
+
+            &:hover{
+                background:rgba($color: #575757, $alpha: 0.5)
+            }
+            
+            &:focus{
+                border-color:#df86ff;
+            }
+        }
+
+        .remain-text{
+            top:25%;
+            right: 16px;
+            position: absolute;
+            font-size: 14px;
+            font-weight: 500;
+            color:white;
+
+            &.disable{
+                color:#525252;
+            }
+        }
+    }
+
+    .suggest-list{
+        width: 100%;
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 6px;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            background-color: #323232;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: white;
+        }
+
+        &::-webkit-scrollbar-button {
+            width: 0;
+            height: 0;
+        }
+    }
+
+    .suggest-item{
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        padding: 0px 16px;
+        user-select: none;
+        font-size: 14px;
+        font-weight: 500;
+        color:white;
+
+        &:hover, &.selected{
+            background:rgba($color: #575757, $alpha: 0.5)
+        }
+        &:active{
+            background:#282828
+        }
+    }
+    
+    .suggest-item + .suggest-item{
+        border-top: 1px solid #303030; 
+    }
+}

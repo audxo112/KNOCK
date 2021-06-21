@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_view_type_vertical_enabled</title>
+    <g id="Symbol" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_view_type_vertical_enabled">
+            <polygon id="Path" points="0 0 18 0 18 18 0 18"></polygon>
+            <path d="M-1.75,5.75 L-0.75,5.75 L-0.75,12.25 L-1.75,12.25 L-1.75,5.75 Z M0.25,5.75 L1.25,5.75 L1.25,12.25 L0.25,12.25 L0.25,5.75 Z M11.5357143,5.75 L2.96428571,5.75 C2.57142857,5.75 2.25,6.0875 2.25,6.5 L2.25,11.5 C2.25,11.9125 2.57142857,12.25 2.96428571,12.25 L11.5357143,12.25 C11.9285714,12.25 12.25,11.9125 12.25,11.5 L12.25,6.5 C12.25,6.0875 11.9285714,5.75 11.5357143,5.75 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero" transform="translate(5.250000, 9.000000) rotate(-90.000000) translate(-5.250000, -9.000000) "></path>
+            <path d="M5.75,5.75 L6.75,5.75 L6.75,12.25 L5.75,12.25 L5.75,5.75 Z M7.75,5.75 L8.75,5.75 L8.75,12.25 L7.75,12.25 L7.75,5.75 Z M19.0357143,5.75 L10.4642857,5.75 C10.0714286,5.75 9.75,6.0875 9.75,6.5 L9.75,11.5 C9.75,11.9125 10.0714286,12.25 10.4642857,12.25 L19.0357143,12.25 C19.4285714,12.25 19.75,11.9125 19.75,11.5 L19.75,6.5 C19.75,6.0875 19.4285714,5.75 19.0357143,5.75 Z" id="Shape-Copy" fill="#FFFFFF" fill-rule="nonzero" transform="translate(12.750000, 9.000000) rotate(-90.000000) translate(-12.750000, -9.000000) "></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,116 @@
+@import "utils";
+
+$list-padding:1px;
+
+.priority-list-wrap-out{
+    width: 200px;
+    height: 640px;
+    padding:$list-padding;
+    border-radius: 6px;
+    border: solid 1px #484848;
+    background-color: #191919;
+    display: inline-flex;
+    flex-direction: row;
+    position: relative; 
+
+    .priority-list-wrap{
+        width: 100%;
+        height: 100%;
+        position: relative; 
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex-grow: 1;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+    
+        &::-webkit-scrollbar-track {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            background-color: #323232;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: white;
+        }
+    
+        &::-webkit-scrollbar-button {
+            width: 0;
+            height: 0;
+        }
+
+        .header{
+            width: 100%;
+            height:50px;
+            line-height: 50px;
+            padding-top:10px - $list-padding;
+            position: sticky;
+            top:0;
+            left:0;
+            right:0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom:solid 1px #242424;
+            background-color: #191919;
+        }
+    
+        .label-wrap{
+            .label{
+                margin-left:20px - $list-padding;
+                font-size:14px;
+                font-weight: bold;
+                color:white;
+            }
+        }
+    
+        .append-btn{
+            width:24px;
+            height:24px;
+            margin-right:16px - $list-padding;
+            cursor: pointer;
+        }
+    
+        .priority-item{
+            height: 50px;
+            line-height: 50px;
+            padding:0 24px - $list-padding;
+            font-size:12px;
+            font-weight: 500;
+            color:white;
+            user-select: none;
+    
+            &.selected, &:hover{
+                background-color:#282828;
+            }
+    
+            &:active{
+                background-color: #575757;
+            }
+        }
+    }
+
+    .loading-wrap{
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .loading-progress{
+            width:30px;
+            height:30px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: $primary-color;
+            border-right-color: $primary-color;
+            border-bottom-color: $primary-color;
+            animation: spinner .8s linear infinite;
+        }
+    }
+}

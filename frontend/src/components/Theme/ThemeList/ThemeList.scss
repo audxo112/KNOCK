@@ -1,0 +1,129 @@
+.theme-list-wrap{
+    width: 100%;
+
+    .theme-items-wrap{
+        width: 100%;
+        .header-wrap{
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            display: flex;
+
+            .header-text{
+                font-size: 21px;
+                font-weight: 500;
+                color:white;
+                display: flex;
+            }
+
+            .open-icon{
+                width:60px;
+                height: 60px;
+                padding: 21px;
+                display: flex;
+                cursor: pointer;
+            }
+        }
+
+        .divider{
+            height: 1px;
+            background-color: #242424;
+        }
+    }
+
+    .theme-items{
+        display:flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        padding: 30px 11px 40px 11px;
+    }
+
+    .user-wrap{
+        margin-top:3px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .user-avatar-wrap{
+            width:16px;
+            height:16px;
+            display: flex;
+    
+            img[src=""]{
+                display: none;
+            }
+    
+            .avatar{
+                width:100%;
+                height:100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+    
+            .avatar-default{
+                width:100%;
+                height:100%;
+                border-radius: 50%;
+                background-color: #d8d8d8; 
+            }
+        }
+
+        .user-nickname{
+            margin-left:4px;
+            font-size: 12px;
+            font-weight: 500;
+            color:#929292;
+        }
+    }
+
+    .theme-item-wrap{
+
+        .thumbnail-wrap{
+            width:134px;
+            height:260px;
+            position:relative;
+            display: flex;
+            cursor: pointer;
+    
+            .thumbnail{
+                width:100%;
+                height:100%;
+                object-fit: fill;
+                border-radius: 6px;
+            }
+    
+            .content-icon{
+                width:18px;
+                height:18px;
+                left:8px;
+                bottom:8px;
+                position:absolute;
+                display: flex;
+            }
+
+            .shadow{
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border: solid 1px #303030;
+                background:linear-gradient(to bottom, rgba(74, 74, 74, 0), rgba(36, 36, 36, 0.5));
+                border-radius: 6px;       
+                position:absolute;
+
+                &:hover{
+                    border: solid 1px #D86CFF;
+                }
+            }
+        }
+
+        .theme-title{
+            margin-top:4px;
+            font-size:14px;
+            font-weight: 500;
+            color:white;
+        }
+
+        
+    }
+}

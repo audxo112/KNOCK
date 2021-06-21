@@ -1,0 +1,77 @@
+@import "utils";
+
+.theme-upload-template{
+    padding: 0 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .header{
+        width:1160px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .control{
+            margin-top: 24px;
+            padding:5px;
+            display: flex;
+            flex-direction: row;
+        }
+    }
+
+    .theme-upload-form{
+        display: flex;
+        flex-direction: row;
+        margin-top: 24px;
+    }
+
+    .primary-pannel{
+        min-width: 360px;
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+
+        .title-input-pos{
+            margin-top:24px; 
+        }
+
+        .tag-input-pos{
+            margin-top:24px;
+        }
+
+        .link-input-pos{
+            margin-top:24px;
+        }
+        .post-period-pos{
+            margin-top:24px;
+        }
+        .curation-selector-pos{
+            margin-top:24px;
+        }
+    }
+
+    .thumbanil{
+        width:240px;
+        min-width: 240px;
+        margin-left: 63px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .capture-btn{
+            margin-top: 10px;
+        }
+    }
+    .large-video{
+        width:240px;
+        min-width: 240px;
+        margin-left: 12px;
+    }
+    .normal-video{
+        width:240px;
+        min-width: 240px;
+        margin-left: 12px;
+    }
+}

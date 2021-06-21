@@ -1,0 +1,48 @@
+.report-user-template{
+    padding: 0 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .search-form{
+        width:1140px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .header{
+        width:1140px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .filter{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .sanctions{
+        padding:5px;
+        display: flex;
+        flex-direction: row;
+
+        .sanctions-type{
+            width:170px;
+        }
+        .sanctions-period{
+            width:170px;
+            margin-left: 10px;
+        }
+        .sanctions-confirm{
+            width:250px;
+            margin-left: 12px;
+        }
+    }
+
+    .report-user-list{
+        width:1140px;
+        display: flex;
+    }
+}

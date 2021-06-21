@@ -1,0 +1,33 @@
+.theme-list-template{
+    padding: 0 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .search-form{
+        width:1160px;
+        height:60px;
+        margin-top: 12px;
+        align-items: center;
+        display: flex;
+        flex-direction: row-reverse;
+
+        .search-input{
+            margin-left: 10px;
+            flex-grow: 1;
+        }
+
+        .search-icon{
+            width: 60px;
+            height: 60px;
+            padding: 6px;
+        }
+    }
+
+    .upload-theme-list{
+        width:1160px;
+        margin-bottom: 40px;
+        display: flex;
+    }
+}

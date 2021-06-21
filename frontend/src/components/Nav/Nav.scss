@@ -1,0 +1,124 @@
+@import "utils";
+
+.nav-wrapper{
+    width:100%;
+    margin-bottom:60px;
+    padding:0px 150px;
+    user-select: none;
+    display:flex;
+    flex-direction: row;
+    position:fixed;
+    background-color: #191919;
+    z-index: 10;
+
+    .nav-logo{
+        min-width:100px;
+        width:100px;
+        height:60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img{
+            max-width:100%;
+            max-height:100%;
+        }
+    }
+
+    .nav-space{
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .nav-menu{
+        height:60px;
+        position:relative;
+        cursor: pointer;
+
+        line-height: 60px;
+        padding:0 16px;
+        white-space: nowrap;
+        text-decoration: none;
+        color:white;
+        display: flex;
+
+        &.active{
+            cursor:none;
+            pointer-events: none;
+            background-color:#242424;
+        }
+        
+        &:hover, &.hover{
+            background-color:#242424;
+        }
+    }
+
+    .nav-sub-wrapper{
+        display:none;
+        position:absolute;
+        padding: 0 150px;
+        top:100%;
+        left:0;
+        right:0;
+        background-color:#242424;
+
+        &.active, &.hover{
+            display:flex;
+            flex-direction: row;
+        }
+    }
+
+    .nav-sub-menu{
+        height:60px;
+        line-height: 60px;
+        padding:0 16px;
+        white-space: nowrap;
+        text-decoration: none;
+        color:#525252;
+        display: flex;
+
+        &.active{
+            color:white;
+            pointer-events: none;
+            border-bottom:white solid 2px;
+            cursor:none;
+        }
+    }
+
+    .nav-user-create{
+        height:60px;
+        flex:1;
+        display: flex;
+        flex-direction: row-reverse;        
+
+        a{
+            height:60px;
+            padding: 0 16px;
+            line-height: 60px;
+            text-decoration: none;
+            white-space: nowrap;
+            color:white;
+            text-align: end;
+            display: inline-block;
+        }
+    }
+
+    .nav-profile-wrapper{
+        width:60px;
+        height:60px;
+        padding: 12px;
+
+        .nav-profile{
+            min-width:36px;
+            min-height:36px;
+            border-radius: 100%;  
+            border:solid 1px #979797;
+            background-color: #d8d8d8;
+            cursor: pointer;
+        }
+    }
+}
+
+.nav-pos{
+    height: 120px;
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_check_unchecked</title>
+    <g id="Symbol" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_check_unchecked">
+            <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+            <circle id="Oval" fill="#FFFFFF" cx="12" cy="12" r="12"></circle>
+            <polygon id="Path" fill="#000000" fill-rule="nonzero" points="9.70358643 14.8566922 5.83838384 11.0912037 4 12.9295875 9.70358643 18.5334598 20.2369919 8.33838384 18.398608 6.5"></polygon>
+        </g>
+    </g>
+</svg>

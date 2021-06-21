@@ -1,0 +1,62 @@
+.curation-folder-upload-template{
+    padding: 0 150px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .control{
+        height: 60px;
+        padding: 5px;
+        margin-top: -84px;
+        top:0;
+        right: 0;
+        display: flex;
+        position: absolute;
+    }
+
+    .curation-folder-form{
+        margin-top:108px;
+        position:relative;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .primary-pannel{
+        min-width: 390px;
+        width:390px;
+    }
+
+    .can-not-upload{
+        width: 870px;
+        min-width:870px;
+        height: 640px;
+        min-height: 640px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size:21px;
+        font-weight: bold;
+        color:#525252;
+    }
+
+    .secondary-pannel{
+        min-width: 360px;
+        width:360px;
+        margin-left: 30px;
+
+        .sub-title{
+            margin-top:24px;
+        }
+
+        .description{
+            margin-top:24px;
+        }
+    }
+
+    .third-pannel{
+        min-width: 450px;
+        width:450px;
+        margin-left: 30px;
+    }
+}

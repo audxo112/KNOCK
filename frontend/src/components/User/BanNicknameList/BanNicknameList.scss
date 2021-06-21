@@ -1,0 +1,95 @@
+.ban-nickname-list-wrap{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+
+    .filter-wrap{
+        height: 60px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+
+        .filter{
+            margin-left: 24px;
+        }
+    }
+
+    .divider{
+        height: 1px;
+        background-color: #242424;
+    }
+
+    .ban-nickname-list{
+        display: flex;
+        flex-direction: column;
+
+        .header{
+            padding:0px 16px;
+            height:60px;
+            line-height: 60px;
+            font-weight: 500;
+            font-size: 21px;
+            color:white;
+
+        }
+
+        .ban-nickname-items{
+            display: flex;
+            flex-direction: row;
+            margin-top:-12px;
+            margin-left:-16px;
+        }
+    }
+
+    .ban-nickname-list+.ban-nickname-list{
+        margin-top: 24px;
+    }
+
+    .item{
+        padding: 6px 8px;
+        border-radius: 6px;
+        background-color: #242424;
+        border: 1px solid #303030;
+        display: flex;
+        align-items: center;
+        margin-left: 16px;
+        margin-top: 12px;
+
+        .nickname{
+            font-weight: 500;
+            font-size: 12px;
+            color:white;
+            display: flex;
+        }
+
+        .delete{
+            width:18px;
+            height:18px;
+            margin-left:8px;
+            display: flex;
+        }
+
+        .loading-wrap{
+            width:14px;
+            height:14px;
+            margin-left:8px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+    
+            .loading-progress{
+                width:14px;
+                height:14px;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                border-top-color: $primary-color;
+                border-right-color: $primary-color;
+                border-bottom-color: $primary-color;
+                animation: spinner .8s linear infinite;
+            }
+        }
+    }
+
+    
+}

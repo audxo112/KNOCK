@@ -1,0 +1,50 @@
+@import "utils";
+
+
+// example
+.btn{
+    margin: 50px auto;
+    border-radius: 25px;
+    background-color: #38d9a9;
+    // box-shadow: 0 2px 4px 0 #888888;
+    // box-shadow : h-offset, v-offset, blur, spread, color, inset
+    display: inline-block;
+    // block : 한줄을 다 차지함
+    // inline : 텍스트 처럼 적용됨
+    // inline-block : 높이, 폭 을 설정 할수 있고 나란히 배치가능
+    // 수평 정렬을 위해선 부모에서 text-align: center; 설정 해줘야한다
+    padding:15px 80px;
+    color:#ffffff;
+}
+
+
+.ripple{
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+
+    .rippleContainer{
+        position: absolute;
+        top:0;
+        right:0;
+        bottom:0;
+        left:0;
+
+        span{
+            transform: scale(0);
+            border-radius: 100%;
+            position:absolute;
+            opacity: 0.75;
+            background-color: #ffffff;
+            animation: ripple 850ms;
+            pointer-events: none;
+        }
+    }
+}
+
+@keyframes ripple{
+    to{
+        opacity: 0;
+        transform: scale(2);
+    }
+}

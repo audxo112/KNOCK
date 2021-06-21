@@ -1,0 +1,75 @@
+@import "utils";
+
+.frame-list-template{
+    padding: 0 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .template-header{
+        margin-top:24px;
+        width:1160px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .back-pos{
+            width: 60px;
+            height: 60px;
+            padding: 6px;
+        }
+
+        .control{
+            
+            padding:5px;
+            display: flex;
+            flex-direction: row;
+
+            .update-pos{
+                margin-left: 12px;
+            }
+        }
+    }
+
+    .frame-form{
+        display: flex;
+        flex-direction: row;
+        margin-top: 24px;
+    }
+
+    .primary-pannel{
+        min-width: 200px;
+        width: 200px;
+        height: 100%;
+        margin-right: 20px;
+        position: relative;
+    }
+
+    .frame-list-pos{
+        width: 930px;
+        height: 720px;
+    }
+
+    .secondary-pannel{
+        width: 360px;
+        min-width: 240px;
+        height:auto;
+        margin-left: 30px;
+        margin-right: 45px;
+        display:flex;
+        flex-direction: column;
+
+        .title-input-pos,
+        .priority-selector-pos,
+        .scale-type-selector-pos,
+        .repeat-mode-selector-pos{
+            margin-top:24px;
+        }
+    }   
+
+    .large-frame-pos{
+        margin-right: 15px;
+    }
+}
