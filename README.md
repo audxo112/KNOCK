@@ -1,6 +1,4 @@
-knock rest server, knock editor
-
-knock rest server 
+### knock rest server 
 
 구성 : docker - nginx - gunicorn - django
 인증 : jwt auth
@@ -8,7 +6,7 @@ OS : centOS
 
 
 
-knock editor
+### knock editor
 
 구성 : docker - nginx - react
 OS : centOS
