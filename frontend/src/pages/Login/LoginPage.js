@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import LoginTemplate from "./LoginTemplate"
 import { GoogleLoginButton } from "components/LoginButton"
 
-import { googleLogin, login } from "service/authService";
+import { googleLogin } from "service/authService";
 import { STATUS_LOADING } from "const/auth"
 
 class LoginPage extends Component {
@@ -19,14 +19,10 @@ class LoginPage extends Component {
             loading={loading}
             status={status}
             googleLogin={
-                // <GoogleLoginButton
-                //     clientId="983851189873-ir4o84m068oc2kqrf5svbjg74m0jhmfe.apps.googleusercontent.com"
-                //     loading={status === STATUS_LOADING}
-                //     onSuccess={this.handleSuccess} />
-
-                <button onClick={() => {
-                    login()
-                }}>로그인</button>
+                <GoogleLoginButton
+                    clientId="983851189873-ir4o84m068oc2kqrf5svbjg74m0jhmfe.apps.googleusercontent.com"
+                    loading={status === STATUS_LOADING}
+                    onSuccess={this.handleSuccess} />
             }
         />
     }
