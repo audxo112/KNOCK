@@ -155,8 +155,8 @@ DATABASES = {
         "NAME": "knock",
         "USER": "root",
         "PASSWORD": "!dlfdltka1",
-        "HOST": "localhost",
-        "PORT": "",
+        "HOST": "knockconsole.com",
+        "PORT": "5432",
     }
 }
 
