@@ -46,6 +46,42 @@ class GoogleLogin(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class GoogleEditorLogin(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        payload = {"access_token": request.data.get("access_token")}
+        r = requests.get(
+            "https://www.googleapis.com/oauth2/v2/userinfo", params=payload
+        )
+        data = json.loads(r.text)
+
+        if "error" in data:
+            return Response(data["error"]["message"], status=data["error"]["code"])
+
+        serializer = jwt.GoogleJSONSerializer(data=data)
+
+        if serializer.is_valid():
+            user = serializer.object.get("user")
+            if not user.is_usable_editor:
+                return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+            token = serializer.object.get("token")
+            response_data = jwt.jwt_response_payload_handler(token, user, request)
+            response = Response(response_data)
+            if api_settings.JWT_AUTH_COOKIE:
+                expiration = datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA
+                response.set_cookie(
+                    api_settings.JWT_AUTH_COOKIE,
+                    token,
+                    expires=expiration,
+                    httponly=True,
+                )
+            return response
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class EditorUserList(APIView):
     def get(self, request):
         users = models.User.objects.filter(is_usable_editor=True).order_by("order")

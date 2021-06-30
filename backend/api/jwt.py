@@ -1,6 +1,5 @@
+from django.core.exceptions import ValidationError
 import jwt
-
-from collections import OrderedDict
 
 from django.utils import timezone
 from django.utils.translation import ugettext as _
@@ -116,6 +115,27 @@ class GoogleJSONSerializer(Serializer):
                 email=attrs["email"],
                 login_method=User.LOGIN_METHOD_GOOGLE,
             )
+
+        token = jwt_create_token(user)
+
+        return {
+            "token": token,
+            "user": user,
+        }
+
+
+class GoogleVerifySerializer(Serializer):
+    id = serializers.CharField(required=False)
+    email = serializers.CharField(required=False)
+
+    class Meta:
+        fields = ("id", "email")
+
+    def validate(self, attrs):
+        try:
+            user = User.objects.get(username=attrs["id"])
+        except User.DoesNotExist:
+            raise ValidationError("존재하지 않는 사용자 입니다.")
 
         token = jwt_create_token(user)
 
