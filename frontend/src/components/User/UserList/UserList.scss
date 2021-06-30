@@ -89,6 +89,7 @@ $list-padding:1px;
 
         .avatar-wrap{
             width:32px;
+            min-width: 32px;
             height:32px;
             display: flex;
 
@@ -119,15 +120,25 @@ $list-padding:1px;
         }
 
         .nickname{
+            width: 135px;
             font-size: 12px;
             font-weight: 500;
             color:white;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
+            display: block;
         }
 
         .email{
+            width: 135px;
             font-size: 12px;
             font-weight: 500;
             color:#929292;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
+            display: block;
         }
     }
 

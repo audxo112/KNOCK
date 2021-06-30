@@ -24,7 +24,7 @@ class AuthAPI {
 
     googleLogin = (token) => {
         return axios.post(
-            `${HOST}/api/users/rest-auth/google/`, {
+            `${HOST}/api/users/rest-auth/google/editor/`, {
             access_token: token,
         }, JSONConfig()
         )

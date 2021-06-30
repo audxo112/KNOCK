@@ -50,6 +50,7 @@ class GoogleLoginButton extends Component {
                 clientId={clientId}
                 onSuccess={onSuccess}
                 onFailure={onFailure}
+                cookiePolicy={'single_host_origin'}
                 render={renderProps => {
                     return (<div className={cx("google-button-wrap")}
                         onClick={renderProps.onClick}
@@ -61,6 +62,7 @@ class GoogleLoginButton extends Component {
                         </div>
                     </div>)
                 }}
+
             />
         )
     }
