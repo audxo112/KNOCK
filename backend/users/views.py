@@ -65,7 +65,7 @@ class GoogleEditorLogin(APIView):
 
         if serializer.is_valid():
             user = serializer.object.get("user")
-            if not user.is_usable_editor:
+            if not user.is_editor:
                 return Response(status=status.HTTP_401_UNAUTHORIZED)
 
             token = serializer.object.get("token")
@@ -86,7 +86,7 @@ class GoogleEditorLogin(APIView):
 
 class EditorUserList(APIView):
     def get(self, request):
-        users = models.User.objects.filter(is_usable_editor=True).order_by("order")
+        users = models.User.objects.filter(is_editor=True).order_by("order")
         serializer = serializers.UserSerializer(users, many=True)
         return Response(
             serializer.data,
