@@ -14,7 +14,7 @@ class ThemeList(APIView):
         page = request.GET.get("page", 1)
         offset = request.GET.get("offset", 10)
 
-        theme_list = models.Theme.objects.get_queryset(
+        theme_list = models.Theme.objects.filter(
             owner__upload_stop_period__gte=datetime.now(),
             post_start_datetime__gte=datetime.now(),
             post_end_datetime__lte=datetime.now(),
