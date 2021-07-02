@@ -13,6 +13,7 @@ from . import models, serializers
 from api import jwt
 
 
+# 앱에서 로그인 하는 유저가 사용
 class GoogleLogin(APIView):
     permission_classes = (AllowAny,)
 
@@ -46,6 +47,7 @@ class GoogleLogin(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# 에디터에서 로그인 하는 유저가 사용
 class GoogleEditorLogin(APIView):
     permission_classes = (AllowAny,)
 

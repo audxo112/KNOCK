@@ -97,12 +97,6 @@ class User(core_models.FleetUserModels):
         help_text=_("에디터 인지 여부, 기본값 False"),
     )
 
-    is_usable_editor = models.BooleanField(
-        _("에디터사용"),
-        default=False,
-        help_text=_("에디터를 사용가능한지 여부, 기본값 False"),
-    )
-
     is_visibility = models.BooleanField(
         _("컨텐츠 노출 여부"),
         default=True,

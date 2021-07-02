@@ -1,5 +1,6 @@
 import pprint
 import json
+from datetime import datetime
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage
 from rest_framework import status
@@ -13,7 +14,11 @@ class ThemeList(APIView):
         page = request.GET.get("page", 1)
         offset = request.GET.get("offset", 10)
 
-        theme_list = models.Theme.objects.get_queryset().order_by("-created")
+        theme_list = models.Theme.objects.get_queryset(
+            owner__upload_stop_period__gte=datetime.now(),
+            post_start_datetime__gte=datetime.now(),
+            post_end_datetime__lte=datetime.now(),
+        ).order_by("-created")
 
         paginator = Paginator(theme_list, offset)
 
@@ -45,6 +50,26 @@ class ThemeList(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST,
         )
+
+
+class ThemeListInEditor(APIView):
+    def get(self, request):
+        user = request.user
+        if user is None or not user.is_editor:
+            return Response(statue=status.HTTP_401_UNAUTHORIZED)
+
+        page = request.GET.get("page", 1)
+        offset = request.GET.get("offset", 30)
+
+        theme_list = models.Theme.objects.get_queryset().order_by("-created")
+
+        paginator = Paginator(theme_list, offset)
+
+        try:
+            serializer = serializers.ThemeSerializer(paginator.page(page), many=True)
+            return Response(serializer.data)
+        except EmptyPage:
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class ThemeDetail(APIView):

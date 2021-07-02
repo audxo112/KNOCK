@@ -6,7 +6,6 @@ class UserManager(managers.CustomUserManager):
     def create_editor_user(self, **kwargs):
         user = self.create(**kwargs)
         user.is_editor = True
-        user.is_usable_editor = True
         user.is_verified = True
         user.save(using=self._db)
         return user
@@ -22,9 +21,6 @@ class UserManager(managers.CustomUserManager):
         instance.grade = kwargs.get("grade", instance.grade)
         instance.is_visibility = kwargs.get("is_visibility", instance.is_visibility)
         instance.is_verified = kwargs.get("is_verified", instance.is_verified)
-        instance.is_usable_editor = kwargs.get(
-            "is_usable_editor", instance.is_usable_editor
-        )
         instance.upload_stop_period = kwargs.get(
             "upload_stop_period", instance.upload_stop_period
         )

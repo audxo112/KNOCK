@@ -34,10 +34,10 @@ export const googleLogin = (token) => {
     })
 }
 
-export const login = () => {
-    localStorage.setItem("token", "login")
-    AuthActions.changeStatus(STATUS_AUTH)
-}
+// export const login = () => {
+//     localStorage.setItem("token", "login")
+//     AuthActions.changeStatus(STATUS_AUTH)
+// }
 
 export const logout = () => {
     localStorage.removeItem("token")

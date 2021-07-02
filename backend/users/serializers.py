@@ -79,7 +79,6 @@ class UserSerializer(serializers.ModelSerializer):
             "grade",
             "order",
             "is_verified",
-            "is_usable_editor",
             "is_visibility",
             "upload_stop_period",
             "avatars",
@@ -103,7 +102,6 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "email": {"required": False},
             "is_verified": {"required": False},
-            "is_usable_editor": {"required": False},
             "is_visibility": {"required": False},
             "upload_stop_period": {"required": False},
         }

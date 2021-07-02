@@ -1,4 +1,3 @@
-from django.db.models import Q
 from django.db import models
 from django.contrib import admin
 from django.utils.html import mark_safe
@@ -56,7 +55,6 @@ class UserAdmin(core_admin.FleetUserAdmin):
             {
                 "fields": (
                     "is_editor",
-                    "is_usable_editor",
                     "is_verified",
                     "is_visibility",
                     "upload_stop_period",
@@ -104,7 +102,6 @@ class UserAdmin(core_admin.FleetUserAdmin):
         "login_method",
         "order",
         "is_editor",
-        "is_usable_editor",
         "is_verified",
         "is_visibility",
         "last_login",
