@@ -101,9 +101,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = (
     "http://localhost:3000",
-    "http://218.151.64.114:3000",
     "http://localhost:8000",
-    "http://218.151.64.114:8000",
+    "https://knockconsole.com",
 )
 
 CORS_ALLOW_CREDENTIALS = True
