@@ -7,7 +7,6 @@ class FrameManager(managers.CustomManager):
             return None
 
         instance.is_verified = kwargs.get("is_verified", instance.is_verified)
-        instance.is_confirm = kwargs.get("is_confirm", instance.is_confirm)
         instance.is_pending = kwargs.get("is_pending", instance.is_pending)
         instance.title = kwargs.get("title", instance.title)
         instance.scale_type = kwargs.get("scale_type", instance.scale_type)
