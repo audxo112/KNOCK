@@ -23,8 +23,13 @@ import { PAGE_FRAME_DETAIL, PAGE_FRAME_LIST } from "const/page";
 import { FrameList } from "components/Frame";
 
 class FrameListPage extends Component {
+    lastElementRef = React.createRef()
     normalFrameRef = React.createRef()
     largeFrameRef = React.createRef()
+
+    state = {
+        page: 1
+    }
 
     loadUsers = () => {
         const loader = setTimeout(() => {
@@ -43,17 +48,16 @@ class FrameListPage extends Component {
         })
     }
 
-    loadMaxPriority = (callback = () => { }) => {
+    loadMaxPriority = () => {
         const loader = setTimeout(() => {
             FrameListActions.changePriorityLoading(true)
         }, 300)
 
-        frameAPI.getMaxPriority(
+        return frameAPI.getMaxPriority(
         ).then(({ data }) => {
             clearTimeout(loader)
             FrameListActions.changePriorityLoading(false)
             FrameListActions.setMaxPriority(data)
-            callback()
         }).catch((error) => {
             clearTimeout(loader)
             FrameListActions.changePriorityLoading(false)
@@ -66,15 +70,20 @@ class FrameListPage extends Component {
             FrameListActions.changeFramesLoading(true)
         }, 300)
 
-        frameAPI.getFrames(
-            priority
-        ).then(({ data }) => {
+        const { page } = this.state
+
+        return frameAPI.getFrames(
+            priority,
+            page,
+        ).then(({ data, status }) => {
             clearTimeout(loader)
             FrameListActions.changeFramesLoading(false)
-            if (refresh)
-                FrameListActions.refreshFrames(data)
-            else
-                FrameListActions.setFrames(data)
+            if (status === 200) {
+                FrameListActions.appendFrames(data)
+                this.setState({
+                    page: page + 1
+                })
+            }
         }).catch((error) => {
             clearTimeout(loader)
             FrameListActions.changeFramesLoading(false)
@@ -440,11 +449,49 @@ class FrameListPage extends Component {
         })
     }
 
-    componentDidMount() {
-        this.loadUsers()
-        this.loadMaxPriority(() => {
-            this.loadFrames(1)
+    handleInfiniteScrolling = (entries, observer) => {
+        const {
+            priority,
+        } = this.props.selected
+
+        const load = async (entry, observer) => {
+            observer.unobserve(entry.target)
+            await this.loadFrames(priority)
+            if (entry.target !== this.lastElementRef.current) {
+                observer.observe(this.lastElementRef.current)
+            }
+        }
+
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                load(entry, observer)
+            }
         })
+    }
+
+    observer = null;
+
+    componentDidMount() {
+        const load = async (observer) => {
+            try {
+                await this.loadMaxPriority()
+                await this.loadFrames(1)
+            }
+            catch (err) { }
+            if (observer && this.lastElementRef.current) {
+                observer.observe(this.lastElementRef.current)
+            }
+        }
+
+        this.observer = new IntersectionObserver(
+            this.handleInfiniteScrolling, {
+            root: null,
+            threshold: 0.5,
+        })
+
+        this.loadUsers()
+
+        load(this.observer)
     }
 
     componentWillUnmount() {

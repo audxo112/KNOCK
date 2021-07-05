@@ -167,6 +167,6 @@
       "react-app"
     ]
   },
-  "proxy": "http://218.151.64.114:8000",
+  "proxy": "https://knockconsole.com",
   "devDependencies": {}
 }

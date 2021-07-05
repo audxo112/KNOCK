@@ -2,14 +2,21 @@ import axios from "axios";
 import { HOST, JSONConfig, MultipartConfig, thumbnailToItem, contentToItem } from "./apiBase"
 
 class FrameAPI {
-    getFrames = (priority) => {
+    getFrames = (priority, page = 1) => {
+        const params = {
+            params: {
+                page: page,
+                offset: 20,
+            }
+        }
+
         if (priority === undefined) {
             return axios.get(
-                `${HOST}/api/frames/editor/`, JSONConfig()
+                `${HOST}/api/frames/editor/`, params, JSONConfig()
             )
         }
         return axios.get(
-            `${HOST}/api/frames/editor/?priority=${priority}`, JSONConfig()
+            `${HOST}/api/frames/editor/?priority=${priority}`, params, JSONConfig()
         )
     }
 

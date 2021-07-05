@@ -29,6 +29,9 @@ const SELECT_FRAME = "frameList/SELECT_FRAME";
 const UNSELECT_FRAME = "frameList/UNSELECT_FRAME";
 const UPDATE_FRAME = "frameList/UPDATE_FRAME";
 
+const APPEND_FRAMES = "frameList/APPEND_FRAMES";
+const DELETE_FRAME = "frameList/DELETE_FRAME";
+
 const LOAD_CONTENT = "frameList/LOAD_CONTENT";
 const CLEAR_NORMAL_CONTENT = "frameList/CLEAR_NORMAL_CONTENT"
 const CLEAR_LARGE_CONTENT = "frameList/CLEAR_LARGE_CONTENT"
@@ -59,10 +62,12 @@ export const changePriority = createAction(CHANGE_PRIORITY)
 
 export const changeFrameOrder = createAction(CHANGE_FRAME_ORDER)
 export const setFrames = createAction(SET_FRAMES)
+export const appendFrames = createAction(APPEND_FRAMES)
 export const refreshFrames = createAction(REFRESH_FRAMES)
 export const selectFrame = createAction(SELECT_FRAME)
 export const unselectFrame = createAction(UNSELECT_FRAME)
 export const updateFrame = createAction(UPDATE_FRAME)
+export const deleteFrame = createAction(DELETE_FRAME)
 
 export const loadContent = createAction(LOAD_CONTENT);
 export const clearNormalContent = createAction(CLEAR_NORMAL_CONTENT);
@@ -341,6 +346,19 @@ export default handleActions({
         }).merge({
             origin_frames: List(frames),
             frames: List(frames)
+        })
+    },
+    [APPEND_FRAMES]: (state, { payload: items }) => {
+        const new_frames = itemsToFrames(items)
+
+        const old_origin = state.origin_frames
+        const old_frames = state.frames
+        const origin = old_origin.concat(new_frames)
+        const frames = old_frames.concat(new_frames)
+
+        return state.merge({
+            origin_frames: origin,
+            frames: frames,
         })
     },
     [REFRESH_FRAMES]: (state, { payload: items }) => {
