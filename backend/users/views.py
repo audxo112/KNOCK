@@ -29,7 +29,7 @@ class GoogleLogin(APIView):
 
     def post(self, request):
         data, error = googleAuth(request.data.get("access_token"))
-        if error is None:
+        if error:
             return error
 
         serializer = jwt.GoogleJSONSerializer(data=data)
@@ -48,7 +48,7 @@ class GoogleLoginInEditor(APIView):
 
     def post(self, request):
         data, error = googleAuth(request.data.get("access_token"))
-        if error is None:
+        if error:
             return error
 
         serializer = jwt.GoogleJSONSerializer(data=data)
