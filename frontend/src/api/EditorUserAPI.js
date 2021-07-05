@@ -90,7 +90,7 @@ class EditorUserAPI {
 
         form.append("data", JSON.stringify(data))
         return axios.put(
-            `${HOST}/api/users/editor/detail/${user.id}/`, form, MultipartConfig()
+            `${HOST}/api/users/edit/detail/${user.id}/`, form, MultipartConfig()
         )
     }
 
@@ -106,7 +106,7 @@ class EditorUserAPI {
 
 
         return axios.put(
-            `${HOST}/api/users/editor/detail/${user_id}/`, form, MultipartConfig()
+            `${HOST}/api/users/edit/detail/${user_id}/`, form, MultipartConfig()
         )
     }
 

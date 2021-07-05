@@ -2,12 +2,32 @@ import pprint
 import json
 from django.utils import timezone
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . import models, serializers
+from api.permissions import IsEditor
 
 
 class CurationList(APIView):
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        curations = models.ThemeCurationGroup.objects.filter(
+            post_start_datetime__gte=timezone.now(),
+            post_end_datetime__lte=timezone.now(),
+        )
+        # 앱에서 사용할 데이터에 따라 Serializer 를 생성
+        serializer = serializers.GroupMenuSerializer(curations, many=True)
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK,
+        )
+
+
+class CurationMenuList(APIView):
+    permission_classes = (IsEditor,)
+
     def get(self, request):
         curations = models.ThemeCurationGroup.objects.filter(
             post_end_datetime__gte=timezone.now()
@@ -20,6 +40,8 @@ class CurationList(APIView):
 
 
 class GroupList(APIView):
+    permission_classes = (IsEditor,)
+
     def get(self, request):
         isActive = request.GET.get("is_active")
         if isActive is None:
@@ -75,6 +97,8 @@ class GroupList(APIView):
 
 
 class GroupDetail(APIView):
+    permission_classes = (IsEditor,)
+
     def put(self, request, group_id):
         group = models.ThemeCurationGroup.objects.get_or_none(id=group_id)
         if group is None:
@@ -117,6 +141,8 @@ class GroupDetail(APIView):
 
 
 class FolderList(APIView):
+    permission_classes = (IsEditor,)
+
     def get(self, request):
         group_id = request.GET.get("group_id", None)
         if group_id is None:
@@ -178,6 +204,8 @@ class FolderList(APIView):
 
 
 class FolderDetail(APIView):
+    permission_classes = (IsEditor,)
+
     def put(self, request, folder_id):
         folder = models.ThemeCurationFolder.objects.get_or_none(id=folder_id)
         if folder is None:

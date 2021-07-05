@@ -1,8 +1,5 @@
-from datetime import timedelta
 from django.db import models
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import admin
-from django.utils import timezone
 from django.utils.html import mark_safe
 from django.utils.translation import gettext_lazy as _
 from themes import models as theme_models
@@ -94,7 +91,6 @@ class ThemeAdmain(core_admin.FleetAdmin):
             {
                 "fields": (
                     "is_verified",
-                    "is_confirm",
                     "is_pending",
                     "post_start_datetime",
                     "post_end_datetime",
@@ -116,7 +112,6 @@ class ThemeAdmain(core_admin.FleetAdmin):
         "applying_count",
         "applied_count",
         "is_verified",
-        "is_confirm",
         "is_pending",
         "updated",
         "created",

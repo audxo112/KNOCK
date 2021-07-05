@@ -79,7 +79,7 @@ class ThemeAPI {
         form.append("data", JSON.stringify(data))
 
         return axios.post(
-            `${HOST}/api/themes/`, form, MultipartConfig()
+            `${HOST}/api/themes/upload/`, form, MultipartConfig()
         )
     }
 

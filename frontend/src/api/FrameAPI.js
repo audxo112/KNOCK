@@ -5,17 +5,17 @@ class FrameAPI {
     getFrames = (priority) => {
         if (priority === undefined) {
             return axios.get(
-                `${HOST}/api/frames/`, JSONConfig()
+                `${HOST}/api/frames/editor/`, JSONConfig()
             )
         }
         return axios.get(
-            `${HOST}/api/frames/?priority=${priority}`, JSONConfig()
+            `${HOST}/api/frames/editor/?priority=${priority}`, JSONConfig()
         )
     }
 
     getMaxPriority = () => {
         return axios.get(
-            `${HOST}/api/frames/max_priority/`, JSONConfig()
+            `${HOST}/api/frames/editor/max_priority/`, JSONConfig()
         )
     }
 
@@ -63,7 +63,7 @@ class FrameAPI {
         form.append("data", JSON.stringify(data))
 
         return axios.post(
-            `${HOST}/api/frames/`, form, MultipartConfig()
+            `${HOST}/api/frames/editor/`, form, MultipartConfig()
         )
     }
 
@@ -164,7 +164,7 @@ class FrameAPI {
         }).toJS()
 
         return axios.put(
-            `${HOST}/api/frames/`, orders, JSONConfig()
+            `${HOST}/api/frames/editor/`, orders, JSONConfig()
         )
     }
 

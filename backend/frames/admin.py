@@ -75,7 +75,6 @@ class ThemeFrameAdmin(core_admin.FleetAdmin):
             {
                 "fields": (
                     "is_verified",
-                    "is_confirm",
                     "is_pending",
                     "post_start_datetime",
                     "post_end_datetime",
@@ -99,7 +98,6 @@ class ThemeFrameAdmin(core_admin.FleetAdmin):
         "priority",
         "order",
         "is_verified",
-        "is_confirm",
         "is_pending",
         "updated",
         "created",

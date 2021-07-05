@@ -110,7 +110,6 @@ class ThemeFrameSerializer(serializers.ModelSerializer):
             "repeat_mode",
             "priority",
             "is_verified",
-            "is_confirm",
             "is_pending",
             "thumbnails",
             "contents",
@@ -144,7 +143,6 @@ class ThemeFrameSerializer(serializers.ModelSerializer):
         )
         extra_kwargs = {
             "is_verified": {"required": False},
-            "is_confirm": {"required": False},
             "is_pending": {"required": False},
         }
 

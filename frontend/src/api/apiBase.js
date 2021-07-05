@@ -3,7 +3,7 @@ export const HOST = "https://knockconsole.com";
 export function JSONConfig() {
     return {
         headers: {
-            // "Authorization": localStorage.getItem("token") ? `JWT ${localStorage.getItem("token")}` : "",
+            "Authorization": localStorage.getItem("token") ? `JWT ${localStorage.getItem("token")}` : "",
             "Content-Type": "application/json"
         }
     }
@@ -12,7 +12,7 @@ export function JSONConfig() {
 export function MultipartConfig() {
     return {
         headers: {
-            // "Authorization": localStorage.getItem("token") ? `JWT ${localStorage.getItem("token")}` : "",
+            "Authorization": localStorage.getItem("token") ? `JWT ${localStorage.getItem("token")}` : "",
             "Content-Type": "multipart/form-data"
         }
     }

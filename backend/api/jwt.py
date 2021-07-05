@@ -7,6 +7,7 @@ from calendar import timegm
 from datetime import datetime, timedelta
 
 from rest_framework import serializers
+from rest_framework.response import Response
 from rest_framework_jwt.settings import api_settings
 
 from users.models import User
@@ -41,6 +42,20 @@ def jwt_response_payload_handler(token, user=None, request=None):
     return {
         "token": token,
     }
+
+
+def jwt_response(token, user=None, request=None):
+    response_data = jwt_response_payload_handler(token, user, request)
+    response = Response(response_data)
+    if api_settings.JWT_AUTH_COOKIE:
+        expiration = datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA
+        response.set_cookie(
+            api_settings.JWT_AUTH_COOKIE,
+            token,
+            expires=expiration,
+            httponly=True,
+        )
+    return response
 
 
 def jwt_create_token(user):

@@ -1,18 +1,49 @@
 import pprint
 import json
+from django.core.paginator import Paginator, EmptyPage
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from . import models, serializers
+from api.permissions import IsEditor, IsFrameOwnerOrEditor
 
 
 class FrameList(APIView):
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        page = request.GET.get("page", 1)
+        offset = request.GET.get("offset", 20)
+
+        frames = models.ThemeFrame.objects.get_queryset().order_by(
+            "-priority",
+            "-order",
+        )
+
+        paginator = Paginator(frames, offset)
+
+        try:
+            serializer = serializers.ThemeFrameSerializer(
+                paginator.page(page), many=True
+            )
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except EmptyPage:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class FrameListInEditor(APIView):
+    permission_classes = (IsEditor,)
+
     def get(self, request):
         priority = request.GET.get("priority", None)
+        page = request.GET.get("page", 1)
+        offset = request.GET.get("offset", 20)
+
         if priority is None:
-            frames = models.ThemeFrame.objects.all().order_by(
+            frames = models.ThemeFrame.objects.get_queryset().order_by(
                 "-priority",
                 "-order",
             )
@@ -20,8 +51,16 @@ class FrameList(APIView):
             frames = models.ThemeFrame.objects.filter(priority=priority).order_by(
                 "-order"
             )
-        serializer = serializers.ThemeFrameSerializer(frames, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        paginator = Paginator(frames, offset)
+
+        try:
+            serializer = serializers.ThemeFrameSerializer(
+                paginator.page(page), many=True
+            )
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except EmptyPage:
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
     def post(self, request):
         data = json.loads(request.data.pop("data")[0])
@@ -71,6 +110,8 @@ class FrameList(APIView):
 
 
 class FrameMaxPriority(APIView):
+    permission_classes = (IsEditor,)
+
     def get(self, request):
         try:
             frame = models.ThemeFrame.objects.latest("priority")
@@ -85,8 +126,10 @@ class FrameMaxPriority(APIView):
 
 
 class FrameDetail(APIView):
-    def put(self, request, id):
-        frame = models.ThemeFrame.objects.get_or_none(id=id)
+    permission_classes = (IsFrameOwnerOrEditor,)
+
+    def put(self, request, frame_id):
+        frame = models.ThemeFrame.objects.get_or_none(id=frame_id)
         if frame is None:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -114,8 +157,8 @@ class FrameDetail(APIView):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    def delete(self, request, id):
-        frame = models.ThemeFrame.objects.get_or_none(id=id)
+    def delete(self, request, frame_id):
+        frame = models.ThemeFrame.objects.get_or_none(id=frame_id)
         if frame is None:
             return Response(
                 status=status.HTTP_204_NO_CONTENT,

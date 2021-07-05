@@ -86,7 +86,6 @@ class ThemeSerializer(serializers.ModelSerializer):
             "title",
             "link",
             "is_verified",
-            "is_confirm",
             "is_pending",
             "post_start_datetime",
             "post_end_datetime",
@@ -121,7 +120,6 @@ class ThemeSerializer(serializers.ModelSerializer):
         )
         extra_kwargs = {
             "is_verified": {"required": False},
-            "is_confirm": {"required": False},
             "is_pending": {"required": False},
         }
 

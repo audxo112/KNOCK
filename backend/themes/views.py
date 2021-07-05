@@ -4,17 +4,22 @@ from datetime import datetime
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . import models, serializers
+from api.permissions import IsEditor, IsThemeOwnerOrEditor
 
 
 class ThemeList(APIView):
+    permission_classes = (AllowAny,)
+
     def get(self, request):
         page = request.GET.get("page", 1)
-        offset = request.GET.get("offset", 10)
+        offset = request.GET.get("offset", 20)
 
         theme_list = models.Theme.objects.filter(
+            is_pending=False,
             owner__upload_stop_period__gte=datetime.now(),
             post_start_datetime__gte=datetime.now(),
             post_end_datetime__lte=datetime.now(),
@@ -24,15 +29,17 @@ class ThemeList(APIView):
 
         try:
             serializer = serializers.ThemeSerializer(paginator.page(page), many=True)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except EmptyPage:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+# 인증된 유저만 업로드 하기위해
+class UploadTheme(APIView):
     def post(self, request):
         data = json.loads(request.data.pop("data")[0])
 
-        user = request.user
-        if not user.is_anonymous and user.is_editor:
+        if request.user and request.user.is_editor:
             data["is_verified"] = True
 
         serializer = serializers.ThemeSerializer(
@@ -53,13 +60,11 @@ class ThemeList(APIView):
 
 
 class ThemeListInEditor(APIView):
-    def get(self, request):
-        user = request.user
-        if user is None or not user.is_editor:
-            return Response(statue=status.HTTP_401_UNAUTHORIZED)
+    permission_classes = (IsEditor,)
 
+    def get(self, request):
         page = request.GET.get("page", 1)
-        offset = request.GET.get("offset", 30)
+        offset = request.GET.get("offset", 20)
 
         theme_list = models.Theme.objects.get_queryset().order_by("-created")
 
@@ -73,15 +78,14 @@ class ThemeListInEditor(APIView):
 
 
 class ThemeDetail(APIView):
-    def put(self, request, id):
-        theme = models.Theme.objects.get_or_none(id=id)
+    permission_classes = (IsThemeOwnerOrEditor,)
+
+    def put(self, request, theme_id):
+        theme = models.Theme.objects.get_or_none(id=theme_id)
         if theme is None:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         data = json.loads(request.data.get("data"))
-        user = request.user
-        if not user.is_anonymous and user.is_editor:
-            data["is_verified"] = True
 
         serializer = serializers.ThemeSerializer(
             theme,
@@ -104,8 +108,8 @@ class ThemeDetail(APIView):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    def delete(self, request, id):
-        theme = models.Theme.objects.get_or_none(id=id)
+    def delete(self, request, theme_id):
+        theme = models.Theme.objects.get_or_none(id=theme_id)
         if theme is None:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -119,8 +123,12 @@ class ThemeDetail(APIView):
 
 
 class SearchTag(APIView):
+    permission_classes = (AllowAny,)
+
     def get(self, request, search):
         tags = models.ThemeTag.objects.filter(Q(tags__title__icontains=search))
+        # 사용된 수 같은 order 추가하기!
+
         serializer = serializers.TagSerializer(tags, many=True)
         return Response(
             serializer.data,
@@ -130,10 +138,14 @@ class SearchTag(APIView):
 
 # 나중에 규모가 커질경우 사용
 class SearchWithTitleOrTag(APIView):
+    permission_classes = (AllowAny,)
+
     def get(self, request, search):
         themes = models.Theme.objects.filter(
             Q(title__icontains=search) | Q(tags__title__icontains=search)
         )
+        # 좋아요순 같은 order 추가하기 !
+
         serializer = serializers.ThemeSerializer(themes, many=True)
         return Response(
             serializer.data,
@@ -142,6 +154,8 @@ class SearchWithTitleOrTag(APIView):
 
 
 class RecentLink(APIView):
+    permission_classes = (AllowAny,)
+
     def get(self, request):
         # postgreSQL 에서 사용 가능
         # links = (

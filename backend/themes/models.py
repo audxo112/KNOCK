@@ -14,11 +14,6 @@ class Theme(core_models.FleetRandomIDModels):
         default=False,
         help_text=_("에디터가 검증한 여부, 에디터가 올린 테마는 기본값 True"),
     )
-    is_confirm = models.BooleanField(
-        _("확인 여부"),
-        default=False,
-        help_text=_("신고가 들어온 테마를 에디터가 확인한 여부"),
-    )
     is_pending = models.BooleanField(
         _("보류 여부"),
         default=False,

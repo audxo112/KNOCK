@@ -5,7 +5,7 @@ import { HOST, JSONConfig, MultipartConfig, thumbnailToItem } from "./apiBase"
 class CurationAPI {
     getCurations = () => {
         return axios.get(
-            `${HOST}/api/curations/`, JSONConfig()
+            `${HOST}/api/curations/menu/`, JSONConfig()
         )
     }
 
