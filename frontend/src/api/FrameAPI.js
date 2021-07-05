@@ -4,19 +4,16 @@ import { HOST, JSONConfig, MultipartConfig, thumbnailToItem, contentToItem } fro
 class FrameAPI {
     getFrames = (priority, page = 1) => {
         const params = {
-            params: {
-                page: page,
-                offset: 20,
-            }
+            page: page,
+            offset: 20,
         }
 
-        if (priority === undefined) {
-            return axios.get(
-                `${HOST}/api/frames/editor/`, params, JSONConfig()
-            )
+        if (priority !== undefined) {
+            params["priority"] = priority
         }
+
         return axios.get(
-            `${HOST}/api/frames/editor/?priority=${priority}`, params, JSONConfig()
+            `${HOST}/api/frames/editor/`, JSONConfig(params)
         )
     }
 

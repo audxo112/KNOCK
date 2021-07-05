@@ -63,7 +63,7 @@ class FrameListInEditor(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
     def post(self, request):
-        data = json.loads(request.data.pop("data")[0])
+        data = json.loads(request.data.get("data"))
 
         user = request.user
         if not user.is_anonymous and user.is_editor:

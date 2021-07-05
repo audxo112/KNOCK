@@ -1,20 +1,23 @@
 export const HOST = "https://knockconsole.com";
 // export const HOST = "http://127.0.0.1:8000";
-export function JSONConfig() {
+export function JSONConfig(params = null) {
     return {
         headers: {
             "Authorization": localStorage.getItem("token") ? `JWT ${localStorage.getItem("token")}` : "",
             "Content-Type": "application/json"
-        }
+        },
+        params: params
     }
 };
 
-export function MultipartConfig() {
+export function MultipartConfig(params = null) {
     return {
         headers: {
+            // "Access-Control-Allow-Headers": "Content-Type Authorization",
             "Authorization": localStorage.getItem("token") ? `JWT ${localStorage.getItem("token")}` : "",
             "Content-Type": "multipart/form-data"
-        }
+        },
+        params: params
     }
 }
 
