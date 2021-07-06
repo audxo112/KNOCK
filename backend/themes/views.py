@@ -20,7 +20,7 @@ class ThemeList(APIView):
 
         theme_list = models.Theme.objects.filter(
             is_pending=False,
-            owner__upload_stop_period__gte=datetime.now(),
+            # owner__upload_stop_period__gte=datetime.now(),
             post_start_datetime__gte=datetime.now(),
             post_end_datetime__lte=datetime.now(),
         ).order_by("-created")
