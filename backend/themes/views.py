@@ -18,28 +18,11 @@ class ThemeList(APIView):
         page = request.GET.get("page", 1)
         offset = request.GET.get("offset", 20)
 
-        t1 = models.Theme.objects.filter(is_pending=False)
-
-        print(t1)
-
-        t2 = models.Theme.objects.filter(
-            post_start_datetime__gte=datetime.now(),
-            post_end_datetime__lte=datetime.now(),
-        )
-
-        print(t2)
-
-        t3 = models.Theme.objects.filter(
-            owner__upload_stop_period__lte=datetime.now(),
-        )
-
-        print(t3)
-
         theme_list = models.Theme.objects.filter(
             is_pending=False,
             owner__upload_stop_period__lte=datetime.now(),
-            post_start_datetime__gte=datetime.now(),
-            post_end_datetime__lte=datetime.now(),
+            post_start_datetime__lte=datetime.now(),
+            post_end_datetime__gte=datetime.now(),
         ).order_by("-created")
 
         paginator = Paginator(theme_list, offset)
