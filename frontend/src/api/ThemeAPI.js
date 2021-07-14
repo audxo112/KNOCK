@@ -6,13 +6,13 @@ class ThemeAPI {
     getThemes = (
         page
     ) => {
+        const params = {
+            page: page,
+            offset: 20,
+        }
+
         return axios.get(
-            `${HOST}/api/themes/editor/`, {
-            params: {
-                page: page,
-                offset: 20,
-            }
-        }, JSONConfig()
+            `${HOST}/api/themes/editor/`, JSONConfig(params)
         )
     }
 
