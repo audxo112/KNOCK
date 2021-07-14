@@ -9,6 +9,9 @@ class IsEditor(BasePermission):
     """
 
     def has_permission(self, request, view):
+        print(request.user)
+        print(request.user.is_authenticated)
+        print(request.user.is_editor)
         return bool(
             request.user and request.user.is_authenticated and request.user.is_editor
         )
@@ -21,10 +24,16 @@ class IsOneselfOrEditor(BasePermission):
 
     def has_permission(self, request, view):
         if not (bool(request.user and request.user.is_authenticated)):
+            print(request.user)
+            print(request.user.is_authenticated)
             return False
 
         if request.user.is_editor:
+            print(request.user.is_editor)
             return True
+
+        print(request.user.id)
+        print(view.kwargs.get("user_id"))
 
         user_id = view.kwargs.get("user_id")
         return request.user.id == user_id
