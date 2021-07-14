@@ -7,7 +7,7 @@ class ThemeAPI {
         page
     ) => {
         return axios.get(
-            `${HOST}/api/themes/`, {
+            `${HOST}/api/themes/editor/`, {
             params: {
                 page: page,
                 offset: 20,
