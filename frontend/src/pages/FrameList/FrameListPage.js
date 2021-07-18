@@ -79,7 +79,7 @@ class FrameListPage extends Component {
             clearTimeout(loader)
             FrameListActions.changeFramesLoading(false)
             if (status === 200) {
-                FrameListActions.appendFrames(data.item)
+                FrameListActions.appendFrames(data.items)
                 this.setState({
                     page: page + 1
                 })
