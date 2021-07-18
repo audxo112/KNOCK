@@ -45,7 +45,7 @@ class ThemeListPage extends Component {
             clearTimeout(loader)
             ThemeListActions.changeThemesLoading(false)
             if (status === 200) {
-                ThemeListActions.appendThemes(data)
+                ThemeListActions.appendThemes(data.items)
                 this.setState({
                     page: page + 1
                 })
@@ -66,7 +66,7 @@ class ThemeListPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             ThemeListActions.changeUsersLoading(false)
-            ThemeListActions.setUsers(data)
+            ThemeListActions.setUsers(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             ThemeListActions.changeUsersLoading(false)
@@ -77,7 +77,7 @@ class ThemeListPage extends Component {
     loadRecentLinks = () => {
         themeAPI.getRecentLinks(
         ).then(({ data }) => {
-            ThemeListActions.setRecentLinks(data)
+            ThemeListActions.setRecentLinks(data.items)
         }).catch((error) => {
             PopupActions.showResponseError(error)
         })
@@ -149,7 +149,7 @@ class ThemeListPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             ThemeListActions.changeEditLoading(false)
-            ThemeListActions.updateTheme(data)
+            ThemeListActions.updateTheme(data.item)
             PopupActions.showMessage("수정이 완료됬습니다.")
         }).catch((error) => {
             clearTimeout(loader)
@@ -199,7 +199,7 @@ class ThemeListPage extends Component {
             clearTimeout(loader)
             ThemeListActions.changeEditLoading(false)
             if (status === 200) {
-                ThemeListActions.deleteTheme(data)
+                ThemeListActions.deleteTheme(data.item)
                 PopupActions.showMessage("테마를 삭제했습니다.")
             }
             else if (status === 204) {
