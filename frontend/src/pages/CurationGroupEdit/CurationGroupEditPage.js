@@ -22,9 +22,9 @@ class CurationGroupEditPage extends Component {
             clearTimeout(loader)
             CurationGroupEditActions.changeGroupsLoading(false)
             if (refresh)
-                CurationGroupEditActions.refreshGroups(data)
+                CurationGroupEditActions.refreshGroups(data.items)
             else
-                CurationGroupEditActions.setGroups(data)
+                CurationGroupEditActions.setGroups(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationGroupEditActions.changeGroupsLoading(false)

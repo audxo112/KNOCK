@@ -30,7 +30,7 @@ class FrameUploadPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             FrameUploadActions.changeUsersLoading(false)
-            FrameUploadActions.setUsers(data)
+            FrameUploadActions.setUsers(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             FrameUploadActions.changeUsersLoading(false)

@@ -40,7 +40,7 @@ class FrameListPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             FrameListActions.changeUsersLoading(false)
-            FrameListActions.setUsers(data)
+            FrameListActions.setUsers(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             FrameListActions.changeUsersLoading(false)
@@ -79,7 +79,7 @@ class FrameListPage extends Component {
             clearTimeout(loader)
             FrameListActions.changeFramesLoading(false)
             if (status === 200) {
-                FrameListActions.appendFrames(data)
+                FrameListActions.appendFrames(data.item)
                 this.setState({
                     page: page + 1
                 })

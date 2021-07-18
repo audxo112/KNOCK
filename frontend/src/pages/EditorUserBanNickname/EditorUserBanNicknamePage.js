@@ -25,7 +25,7 @@ class EditorUserBanNicknamePage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             EditorUserBanNicknameActions.changeBanNicknamesLoading(false)
-            EditorUserBanNicknameActions.setBanNicknames(data)
+            EditorUserBanNicknameActions.setBanNicknames(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             EditorUserBanNicknameActions.changeBanNicknamesLoading(false)

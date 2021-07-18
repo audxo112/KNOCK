@@ -28,7 +28,7 @@ class CurationThemeEditPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             CurationThemeEditActions.changeGroupsLoading(false)
-            CurationThemeEditActions.setGroups(data)
+            CurationThemeEditActions.setGroups(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationThemeEditActions.changeGroupsLoading(false)
@@ -44,11 +44,12 @@ class CurationThemeEditPage extends Component {
         curationAPI.getFolders(
             group_id
         ).then(({ data }) => {
+            const folders = data.items
             clearTimeout(loader)
             CurationThemeEditActions.changeFoldersLoading(false)
-            CurationThemeEditActions.setFolders(data)
-            if (data.length > 0) {
-                const folder = data[0]
+            CurationThemeEditActions.setFolders(folders)
+            if (folders.length > 0) {
+                const folder = folders[0]
                 CurationThemeEditActions.selectFolder(folder)
                 this.loadThemes(group_id, folder.id)
             }
@@ -71,7 +72,7 @@ class CurationThemeEditPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             CurationThemeEditActions.changeThemesLoading(false)
-            CurationThemeEditActions.setThemes(data)
+            CurationThemeEditActions.setThemes(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationThemeEditActions.changeThemesLoading(false)
@@ -92,7 +93,7 @@ class CurationThemeEditPage extends Component {
             search
         ).then(({ data }) => {
             CurationThemeEditActions.changeCheckSearch(CHECK_SUCCESS)
-            CurationThemeEditActions.setSearchThemes(data)
+            CurationThemeEditActions.setSearchThemes(data.items)
         }).catch((error) => {
             CurationThemeEditActions.changeCheckSearch(CHECK_NONE)
             PopupActions.showResponseError(error)

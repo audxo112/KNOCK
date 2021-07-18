@@ -32,7 +32,7 @@ class EditorUserEditPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             EditorUserEditActions.changeUsersLoading(false)
-            EditorUserEditActions.setUsers(data)
+            EditorUserEditActions.setUsers(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             EditorUserEditActions.changeUsersLoading(false)
@@ -81,7 +81,6 @@ class EditorUserEditPage extends Component {
     }
 
     handleChangeVisibility = (visibility) => {
-        console.log(visibility)
         EditorUserEditActions.changeVisibility(visibility)
     }
 

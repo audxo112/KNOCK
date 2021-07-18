@@ -32,7 +32,7 @@ class CurationFolderEditPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             CurationFolderEditActions.changeGroupsLoading(false)
-            CurationFolderEditActions.setGroups(data)
+            CurationFolderEditActions.setGroups(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationFolderEditActions.changeGroupsLoading(false)
@@ -49,7 +49,7 @@ class CurationFolderEditPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             CurationFolderEditActions.changeFoldersLoading(false)
-            CurationFolderEditActions.setFolders(data)
+            CurationFolderEditActions.setFolders(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationFolderEditActions.changeFoldersLoading(false)

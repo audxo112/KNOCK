@@ -34,7 +34,7 @@ class CurationFolderUploadPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             CurationFolderUploadActions.changeGroupsLoading(false)
-            CurationFolderUploadActions.setGroups(data)
+            CurationFolderUploadActions.setGroups(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationFolderUploadActions.changeGroupsLoading(false)
@@ -50,9 +50,9 @@ class CurationFolderUploadPage extends Component {
             clearTimeout(loader)
             CurationFolderUploadActions.changeFoldersLoading(false)
             if (refresh)
-                CurationFolderUploadActions.refreshFolders(data)
+                CurationFolderUploadActions.refreshFolders(data.items)
             else
-                CurationFolderUploadActions.setFolders(data)
+                CurationFolderUploadActions.setFolders(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationFolderUploadActions.changeFoldersLoading(false)

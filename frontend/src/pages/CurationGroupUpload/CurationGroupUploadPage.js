@@ -24,9 +24,9 @@ class CurationGroupUploadPage extends Component {
             clearTimeout(loader)
             CurationGroupUploadActions.changeGroupsLoading(false)
             if (refresh)
-                CurationGroupUploadActions.refreshGroups(data)
+                CurationGroupUploadActions.refreshGroups(data.items)
             else
-                CurationGroupUploadActions.setGroups(data)
+                CurationGroupUploadActions.setGroups(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationGroupUploadActions.changeGroupsLoading(false)

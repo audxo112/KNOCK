@@ -32,7 +32,7 @@ class ThemeUploadPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             ThemeUploadActions.changeUsersLoading(false)
-            ThemeUploadActions.setUsers(data)
+            ThemeUploadActions.setUsers(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             ThemeUploadActions.changeUsersLoading(false)
@@ -43,7 +43,7 @@ class ThemeUploadPage extends Component {
     loadRecentLinks = () => {
         themeAPI.getRecentLinks(
         ).then(({ data }) => {
-            ThemeUploadActions.setRecentLinks(data)
+            ThemeUploadActions.setRecentLinks(data.items)
         }).catch((error) => {
             PopupActions.showResponseError(error)
         })
@@ -58,7 +58,7 @@ class ThemeUploadPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             ThemeUploadActions.changeCurationsLoading(false)
-            ThemeUploadActions.setCurations(data)
+            ThemeUploadActions.setCurations(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             ThemeUploadActions.changeCurationsLoading(false)

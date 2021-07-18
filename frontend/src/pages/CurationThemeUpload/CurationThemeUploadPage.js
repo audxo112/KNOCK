@@ -29,7 +29,7 @@ class CurationThemeUploadPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             CurationThemeUploadActions.changeGroupsLoading(false)
-            CurationThemeUploadActions.setGroups(data)
+            CurationThemeUploadActions.setGroups(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationThemeUploadActions.changeGroupsLoading(false)
@@ -45,11 +45,12 @@ class CurationThemeUploadPage extends Component {
         curationAPI.getFolders(
             group_id
         ).then(({ data }) => {
+            const folders = data.items
             clearTimeout(loader)
             CurationThemeUploadActions.changeFoldersLoading(false)
-            CurationThemeUploadActions.setFolders(data)
-            if (data.length > 0) {
-                const folder = data[0]
+            CurationThemeUploadActions.setFolders(folders)
+            if (folders.length > 0) {
+                const folder = folders[0]
                 const { filter } = this.props
                 CurationThemeUploadActions.selectFolder(folder)
                 this.loadThemes(group_id, folder.id, filter)
@@ -73,7 +74,7 @@ class CurationThemeUploadPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             CurationThemeUploadActions.changeThemesLoading(false)
-            CurationThemeUploadActions.setThemes(data)
+            CurationThemeUploadActions.setThemes(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             CurationThemeUploadActions.changeThemesLoading(false)
@@ -98,7 +99,7 @@ class CurationThemeUploadPage extends Component {
             search
         ).then(({ data }) => {
             CurationThemeUploadActions.changeCheckSearch(CHECK_SUCCESS)
-            CurationThemeUploadActions.setSearchThemes(data)
+            CurationThemeUploadActions.setSearchThemes(data.items)
         }).catch((error) => {
             CurationThemeUploadActions.changeCheckSearch(CHECK_NONE)
             PopupActions.showResponseError(error)

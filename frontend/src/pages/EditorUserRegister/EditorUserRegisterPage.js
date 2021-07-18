@@ -31,7 +31,7 @@ class EditorUserRegisterPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             EditorUserRegisterActions.changeUsersLoading(false)
-            EditorUserRegisterActions.setUsers(data)
+            EditorUserRegisterActions.setUsers(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             EditorUserRegisterActions.changeUsersLoading(false)
@@ -49,7 +49,7 @@ class EditorUserRegisterPage extends Component {
         ).then(({ data }) => {
             clearTimeout(loader)
             EditorUserRegisterActions.changeSearchLoading(false)
-            EditorUserRegisterActions.setSearchUsers(data)
+            EditorUserRegisterActions.setSearchUsers(data.items)
         }).catch((error) => {
             clearTimeout(loader)
             EditorUserRegisterActions.changeSearchLoading(false)
