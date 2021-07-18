@@ -29,7 +29,7 @@ class ThemeList(APIView):
 
         try:
             serializer = serializers.ThemeSerializer(paginator.page(page), many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({"items": serializer.data}, status=status.HTTP_200_OK)
         except EmptyPage:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -49,7 +49,7 @@ class UploadTheme(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"item": serializer.data}, status=status.HTTP_201_CREATED)
 
         pprint.pprint(serializer.errors)
 
@@ -72,7 +72,7 @@ class ThemeListInEditor(APIView):
 
         try:
             serializer = serializers.ThemeSerializer(paginator.page(page), many=True)
-            return Response(serializer.data)
+            return Response({"items": serializer.data})
         except EmptyPage:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -97,7 +97,7 @@ class ThemeDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -117,7 +117,7 @@ class ThemeDetail(APIView):
         theme.delete()
 
         return Response(
-            data,
+            {"item": data},
             status=status.HTTP_200_OK,
         )
 
@@ -131,7 +131,7 @@ class SearchTag(APIView):
 
         serializer = serializers.TagSerializer(tags, many=True)
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -148,7 +148,7 @@ class SearchWithTitleOrTag(APIView):
 
         serializer = serializers.ThemeSerializer(themes, many=True)
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -172,6 +172,6 @@ class RecentLink(APIView):
         )
 
         return Response(
-            links,
+            {"items": links},
             status=status.HTTP_200_OK,
         )

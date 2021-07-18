@@ -19,8 +19,9 @@ class CurationList(APIView):
         )
         # 앱에서 사용할 데이터에 따라 Serializer 를 생성
         serializer = serializers.GroupMenuSerializer(curations, many=True)
+
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -34,7 +35,7 @@ class CurationMenuList(APIView):
         )
         serializer = serializers.GroupMenuSerializer(curations, many=True)
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -56,7 +57,7 @@ class GroupList(APIView):
             ).order_by("-order")
         serializer = serializers.GroupSerializer(groups, many=True)
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -66,7 +67,7 @@ class GroupList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_201_CREATED,
             )
         pprint.pprint(serializer.errors)
@@ -86,7 +87,7 @@ class GroupList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"items": serializer.data},
                 status=status.HTTP_200_OK,
             )
         pprint.pprint(serializer.errors)
@@ -115,7 +116,7 @@ class GroupDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -135,7 +136,7 @@ class GroupDetail(APIView):
         data = serializers.GroupSerializer(group).data
         group.delete()
         return Response(
-            data,
+            {"item": data},
             status=status.HTTP_200_OK,
         )
 
@@ -154,7 +155,7 @@ class FolderList(APIView):
         ).order_by("-order")
         serializer = serializers.FolderSerializer(folders, many=True)
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -169,7 +170,7 @@ class FolderList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_201_CREATED,
             )
 
@@ -191,7 +192,7 @@ class FolderList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"items": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -225,7 +226,7 @@ class FolderDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -246,6 +247,6 @@ class FolderDetail(APIView):
         data = serializers.FolderSerializer(folder).data
         folder.delete()
         return Response(
-            data,
+            {"item": data},
             status=status.HTTP_200_OK,
         )

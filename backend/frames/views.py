@@ -29,7 +29,10 @@ class FrameList(APIView):
             serializer = serializers.ThemeFrameSerializer(
                 paginator.page(page), many=True
             )
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(
+                {"items": serializer.data},
+                status=status.HTTP_200_OK,
+            )
         except EmptyPage:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -58,7 +61,10 @@ class FrameListInEditor(APIView):
             serializer = serializers.ThemeFrameSerializer(
                 paginator.page(page), many=True
             )
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(
+                {"items": serializer.data},
+                status=status.HTTP_200_OK,
+            )
         except EmptyPage:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -77,7 +83,7 @@ class FrameListInEditor(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_201_CREATED,
             )
 
@@ -99,7 +105,7 @@ class FrameListInEditor(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"items": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -146,7 +152,7 @@ class FrameDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -168,7 +174,7 @@ class FrameDetail(APIView):
         frame.delete()
 
         return Response(
-            data,
+            {"item": data},
             status=status.HTTP_200_OK,
         )
 

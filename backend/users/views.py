@@ -71,7 +71,7 @@ class EditorUserListInEditor(APIView):
         users = models.User.objects.filter(is_editor=True).order_by("order")
         serializer = serializers.UserSerializer(users, many=True)
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -86,7 +86,7 @@ class EditorUserListInEditor(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_201_CREATED,
             )
 
@@ -107,7 +107,7 @@ class EditorUserListInEditor(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"items": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -128,7 +128,7 @@ class UserDetail(APIView):
         user = models.User.objects.get(id=id)
         serializer = serializers.UserSerializer(user)
         return Response(
-            serializer.data,
+            {"item": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -153,7 +153,7 @@ class EditUserDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -173,7 +173,7 @@ class EditUserDetail(APIView):
         user.delete()
 
         return Response(
-            data,
+            {"item": data},
             status=status.HTTP_200_OK,
         )
 
@@ -187,7 +187,7 @@ class SearchWithNameOrEmail(APIView):
         )
         serializer = serializers.UserSerializer(users, many=True)
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -222,7 +222,7 @@ class CheckBanNickname(APIView):
         if bans.exists():
             serializer = serializers.BanNicknameSerializer(bans, many=True)
             return Response(
-                serializer.data,
+                {"items": serializer.data},
                 status=status.HTTP_200_OK,
             )
 
@@ -236,7 +236,7 @@ class BanNickname(APIView):
         bans = models.BanNickname.objects.all().order_by("nickname")
         serializer = serializers.BanNicknameSerializer(bans, many=True)
         return Response(
-            serializer.data,
+            {"items": serializer.data},
             status=status.HTTP_200_OK,
         )
 
@@ -245,7 +245,7 @@ class BanNickname(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                serializer.data,
+                {"item": serializer.data},
                 status=status.HTTP_201_CREATED,
             )
         return Response(
@@ -267,6 +267,6 @@ class BanNicknameDelete(APIView):
         data = serializers.BanNicknameSerializer(ban).data
         ban.delete()
         return Response(
-            data,
+            {"item": data},
             status=status.HTTP_200_OK,
         )
