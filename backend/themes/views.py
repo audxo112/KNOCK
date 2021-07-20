@@ -14,18 +14,6 @@ from api.permissions import IsEditor, IsThemeOwnerOrEditor
 
 
 class RandomMixin(object):
-    seed = ""
-
-    def get(self, *args, **kwargs):
-        print("first random mixin")
-        page = self.request.GET.get("page")
-        if not page or page == "1":
-            self.generate_seed()
-
-        self.seed = self.get_seed()
-
-        return super(RandomMixin, self).get(*args, **kwargs)
-
     def get_seed(self):
         if not self.request.session.get("seed"):
             return self.generate_seed()
@@ -49,13 +37,17 @@ class ThemeList(APIView, RandomMixin):
         print("second theme list")
         page = request.GET.get("page", 1)
         offset = request.GET.get("offset", 20)
+        if not page or page == "1":
+            self.generate_seed()
+        self.seed = self.get_seed()
 
+        self.postgres_setseed()
         theme_list = models.Theme.objects.filter(
             is_pending=False,
             owner__upload_stop_period__lte=datetime.now(),
             post_start_datetime__lte=datetime.now(),
             post_end_datetime__gte=datetime.now(),
-        ).order_by("-created")
+        ).order_by("?")
 
         paginator = Paginator(theme_list, offset)
 
