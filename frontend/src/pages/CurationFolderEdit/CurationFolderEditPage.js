@@ -124,7 +124,7 @@ class CurationFolderEditPage extends Component {
         PopupActions.showMessage("크기가 맞지 않는 이미지입니다.")
     }
 
-    handleCoverOnLoaded = () => {
+    handleCoverOnLoaded = (color) => {
         const { image_loaded } = this.props
         if (image_loaded) return;
 
@@ -142,6 +142,7 @@ class CurationFolderEditPage extends Component {
             group.view_type,
         )
 
+        CurationFolderEditActions.changeDominantColor(color)
         CurationFolderEditActions.setCovers(image)
     }
 
@@ -379,6 +380,7 @@ class CurationFolderEditPage extends Component {
                         value={cover}
                         default_value="/icon/ic_insert_photo.svg"
                         contentType="image"
+                        enableColorThief={true}
                         onLoadFiles={this.handleCoverOnLoadFiles}
                         onLoadedContent={this.handleCoverOnLoaded}
                         onClear={this.handleCoverOnClear} />

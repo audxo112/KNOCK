@@ -16,6 +16,7 @@ const APPEND_MAX_PRIORITY = "frameUpload/APPEND_MAX_PRIORITY";
 const SET_MAX_PRIORITY = "frameUpload/SET_MAX_PRIORITY";
 const SELECT_PRIORITY = "frameUpload/SELECT_PRIORITY";
 
+const CHANGE_DOMINANT_COLOR = "frameUpload/CHANGE_DOMINANT_COLOR"
 const LOAD_CONTENT = "frameUpload/LOAD_CONTENT"
 const CLEAR_NORMAL_CONTENT = "frameUpload/CLEAR_NORMAL_CONTENT"
 const CLEAR_LARGE_CONTENT = "frameUpload/CLEAR_LARGE_CONTENT"
@@ -39,6 +40,7 @@ export const appendMaxPriority = createAction(APPEND_MAX_PRIORITY)
 export const setMaxPriority = createAction(SET_MAX_PRIORITY)
 export const selectPriority = createAction(SELECT_PRIORITY)
 
+export const changeDominantColor = createAction(CHANGE_DOMINANT_COLOR)
 export const loadContent = createAction(LOAD_CONTENT);
 export const clearNormalContent = createAction(CLEAR_NORMAL_CONTENT);
 export const clearLargeContent = createAction(CLEAR_LARGE_CONTENT)
@@ -190,6 +192,9 @@ export default handleActions({
 
         return state.set("max_priority", max_priority)
             .setIn(["frame", "priority"], 1)
+    },
+    [CHANGE_DOMINANT_COLOR]: (state, { payload: color }) => {
+        return state.setIn(["frame", "dominant_color"], color)
     },
     [LOAD_CONTENT]: (state, { payload: list }) => {
         if (!list || list.length === 0) return state

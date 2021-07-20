@@ -47,6 +47,7 @@ class ThemeAPI {
 
         const data = {
             title: theme.title,
+            dominant_color: theme.dominant_color,
             tags: tags,
             link: theme.link,
             owner_id: theme.user.id,
@@ -116,6 +117,9 @@ class ThemeAPI {
 
         if (theme.title !== origin.title) {
             data["title"] = theme.title
+        }
+        if (theme.dominant_color !== origin.dominant_color) {
+            data["dominant_color"] = theme.dominant_color
         }
         if (tagChanged) {
             const tags = theme.tags.map(tag => {

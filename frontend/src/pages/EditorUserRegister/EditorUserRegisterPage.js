@@ -118,7 +118,7 @@ class EditorUserRegisterPage extends Component {
         EditorUserRegisterActions.loadAvatar(files)
     }
 
-    handleAvatarOnLoaded = () => {
+    handleAvatarOnLoaded = (color) => {
         const { image_loaded } = this.props
         if (image_loaded) return;
 
@@ -126,6 +126,7 @@ class EditorUserRegisterPage extends Component {
             this.avatarRef.current
         )
 
+        EditorUserRegisterActions.changeDominantColor(color)
         EditorUserRegisterActions.setAvatars(image)
     }
 
@@ -282,6 +283,7 @@ class EditorUserRegisterPage extends Component {
                     value={avatar}
                     default_value="/icon/ic_insert_photo.svg"
                     contentType="image"
+                    enableColorThief={true}
                     onLoadFiles={this.handleAvatarOnLoadFiles}
                     onLoadedContent={this.handleAvatarOnLoaded}
                     onClear={this.handleAvatarOnClear} />

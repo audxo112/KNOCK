@@ -25,7 +25,8 @@ export const googleLogin = (token) => {
         }
     }).catch((e) => {
         AuthActions.changeStatus(STATUS_NOT_AUTH)
-        if (e.response.status && e.response.status === 401) {
+        const r = e.response
+        if (r && r.status && r.status === 401) {
             PopupActions.showMessage("인증되지 않은 사용자 입니다.")
         }
         else {

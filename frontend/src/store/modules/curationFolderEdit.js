@@ -14,6 +14,7 @@ const CHANGE_TITLE = "curationFolderEdit/CHANGE_TITLE";
 const CHANGE_SUB_TITLE = "curationFolderEdit/CHANGE_SUB_TITLE";
 const CHANGE_DESCRIPTION = "curationFolderEdit/CHANGE_DESCRIPTION"
 
+const CHANGE_DOMINANT_COLOR = "curationFolderEdit/CHANGE_DOMINANT_COLOR"
 const LOAD_COVER = "curationFolderEdit/LOAD_COVER";
 const SET_COVERS = "curationFolderEdit/SET_COVERS";
 const CLEAR_COVER = "curationFolderEdit/CLEAR_COVER";
@@ -39,6 +40,7 @@ export const changeTitle = createAction(CHANGE_TITLE)
 export const changeSubTitle = createAction(CHANGE_SUB_TITLE)
 export const changeDescription = createAction(CHANGE_DESCRIPTION)
 
+export const changeDominantColor = createAction(CHANGE_DOMINANT_COLOR)
 export const loadCover = createAction(LOAD_COVER)
 export const setCovers = createAction(SET_COVERS)
 export const clearCover = createAction(CLEAR_COVER)
@@ -108,6 +110,7 @@ const FolderRecord = Record({
     title: "",
     sub_title: "",
     description: "",
+    dominant_color: "#000000",
     order: 0,
     origin_cover: createOriginImage(),
     default_cover: createDefaultImage(),
@@ -140,6 +143,7 @@ const itemsToFolders = (items) => {
             title: folder.title,
             sub_title: folder.sub_title,
             description: folder.description,
+            dominant_color: folder.dominant_color,
             order: folder.order,
             origin_cover: itemToImage(folder.origin_cover),
             default_cover: itemToImage(folder.default_cover),
@@ -203,6 +207,15 @@ export default handleActions({
         return state.setIn(["selected", "folder", "description"], description)
             .update("folders", folders => folders.setIn(
                 [state.selected.folder_index, "description"], description
+            ))
+    },
+    [CHANGE_DOMINANT_COLOR]: (state, { payload: color }) => {
+        if (state.selected.folder_index === null) {
+            return state
+        }
+        return state.setIn(["selected", "folder", "dominant_color"], color)
+            .update("folders", folders => folders.setIn(
+                [state.selected.folder_index, "dominant_color"], color
             ))
     },
     [LOAD_COVER]: (state, { payload: file }) => {

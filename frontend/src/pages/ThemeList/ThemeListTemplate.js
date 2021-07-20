@@ -5,7 +5,6 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const ThemeListTemplate = ({
-    templateRef,
     showSearch,
     searchButton,
     cancelSearchButton,
@@ -14,7 +13,6 @@ const ThemeListTemplate = ({
 }) => {
     return (
         <div
-            ref={templateRef}
             className={cx("theme-list-template")}>
             <div className={cx("search-form")}>
                 <div className={cx("search-icon")}>

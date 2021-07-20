@@ -40,6 +40,7 @@ class FrameAPI {
         const data = {
             owner_id: frame.user.id,
             title: frame.title,
+            dominant_color: frame.dominant_color,
             priority: frame.priority,
             scale_type: frame.scale_type,
             contents: [],
@@ -93,6 +94,9 @@ class FrameAPI {
         }
         if (frame.title !== origin.title) {
             data["title"] = frame.title
+        }
+        if (frame.dominant_color !== origin.dominant_color) {
+            data["dominant_color"] = frame.dominant_color
         }
         if (frame.scale_type !== origin.scale_type) {
             data["scale_type"] = frame.scale_type

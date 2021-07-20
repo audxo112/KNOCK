@@ -11,6 +11,7 @@ const CHANGE_CHECK_NICKNAME = "editorUserRegister/CHANGE_CHECK_NICKNAME";
 
 const SET_USERS = "editorUserRegister/SET_USERS";
 
+const CHANGE_DOMINANT_COLOR = "editorUserRegister/CHANGE_DOMINANT_COLOR"
 const LOAD_AVATAR = "editorUserRegister/LOAD_AVATAR";
 const SET_AVATARS = "editorUserRegister/SET_AVATARS";
 const CLEAR_AVATAR = "editorUserRegister/CLEAR_AVATAR";
@@ -31,6 +32,7 @@ export const changeCheckNickname = createAction(CHANGE_CHECK_NICKNAME)
 
 export const setUsers = createAction(SET_USERS)
 
+export const changeDominantColor = createAction(CHANGE_DOMINANT_COLOR)
 export const loadAvatar = createAction(LOAD_AVATAR)
 export const setAvatars = createAction(SET_AVATARS)
 export const clearAvatar = createAction(CLEAR_AVATAR)
@@ -99,6 +101,7 @@ const UserRecord = Record({
     nickname: "",
     nickname_status: "",
     nickname_message: "",
+    dominant_color: "#000000",
     origin_avatar: createOriginImage(),
     default_avatar: createDefaultImage(),
     mini_avatar: createMiniImage(),
@@ -123,6 +126,7 @@ const itemsToUsers = (items) => {
             nickname: user.nickname,
             email: user.email,
             grade: user.grade,
+            dominant_color: user.dominant_color,
             order: user.order,
             is_verified: user.is_verified,
             is_usable_editor: user.is_usable_editor,
@@ -159,6 +163,9 @@ export default handleActions({
             nickname_status: status,
             nickname_message: message,
         })
+    },
+    [CHANGE_DOMINANT_COLOR]: (state, { payload: color }) => {
+        return state.setIn(["user", "dominant_color"], color)
     },
     [LOAD_AVATAR]: (state, { payload: items }) => {
         if (items.length <= 0) {

@@ -14,6 +14,7 @@ const CHANGE_TITLE = "curationFolderUpload/CHANGE_TITLE";
 const CHANGE_SUB_TITLE = "curationFolderUpload/CHANGE_SUB_TITLE";
 const CHANGE_DESCRIPTION = "curationFolderUpload/CHANGE_DESCRIPTION";
 
+const CHANGE_DOMINANT_COLOR = "curationFolderUpload/CHANGE_DOMINANT_COLOR";
 const LOAD_COVER = "curationFolderUpload/LOAD_COVER";
 const SET_COVERS = "curationFolderUpload/SET_COVERS";
 const CLEAR_COVER = "curationFolderUpload/CLEAR_COVER";
@@ -38,6 +39,7 @@ export const changeTitle = createAction(CHANGE_TITLE)
 export const changeSubTitle = createAction(CHANGE_SUB_TITLE)
 export const changeDescription = createAction(CHANGE_DESCRIPTION)
 
+export const changeDominantColor = createAction(CHANGE_DOMINANT_COLOR)
 export const loadCover = createAction(LOAD_COVER)
 export const setCovers = createAction(SET_COVERS)
 export const clearCover = createAction(CLEAR_COVER)
@@ -105,6 +107,7 @@ const FolderRecord = Record({
     title: "",
     sub_title: "",
     description: "",
+    dominant_color: "#000000",
     order: 0,
     origin_cover: createOriginImage(),
     default_cover: createDefaultImage(),
@@ -179,6 +182,15 @@ export default handleActions({
         }
         return state.update("folders", folders => folders.setIn(
             [state.current_index, "description"], description
+        ))
+    },
+    [CHANGE_DOMINANT_COLOR]: (state, { paylod: color }) => {
+        state = state.setIn(["folder", "dominant_color"], color)
+        if (state.folders === null) {
+            return state
+        }
+        return state.update("folders", folders => folders.setIn(
+            [state.current_index, "dominant_color"], color
         ))
     },
     [LOAD_COVER]: (state, { payload: file }) => {

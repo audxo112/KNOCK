@@ -122,6 +122,7 @@ class ThemeUploadPage extends Component {
         ThemeUploadActions.setNormalPreload(image.originImage)
 
         if (large_content.content === "") {
+
             ThemeUploadActions.setThumbnail(image)
         }
     }
@@ -156,6 +157,10 @@ class ThemeUploadPage extends Component {
         if (large_content.content === "") {
             ThemeUploadActions.clearThumbnail()
         }
+    }
+
+    handleThumbnailOnLoaded = (color) => {
+        ThemeUploadActions.changeDominantColor(color)
     }
 
     handleCaputreContent = () => {
@@ -398,7 +403,9 @@ class ThemeUploadPage extends Component {
                             height: "493px",
                         }}
                         enableDropDown={false}
-                        enableClearBtn={false} />
+                        enableClearBtn={false}
+                        enableColorThief={true}
+                        onLoadedContent={this.handleThumbnailOnLoaded} />
                 }
                 captureBtn={
                     <Button

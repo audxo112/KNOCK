@@ -23,6 +23,7 @@ const SELECT_PRIORITY = "frameList/SELECT_PRIORITY";
 const CHANGE_PRIORITY = "frameList/CHANGE_PRIORITY"
 
 const CHANGE_FRAME_ORDER = "frameList/CHANGE_FRAME_ORDER";
+const UPDATE_FRAME_ORDERS = "framesList/UPDATE_FRAME_ORDERS"
 const SET_FRAMES = "frameList/SET_FRAMES";
 const REFRESH_FRAMES = "frameList/REFRESH_FRAMES"
 const SELECT_FRAME = "frameList/SELECT_FRAME";
@@ -32,6 +33,7 @@ const UPDATE_FRAME = "frameList/UPDATE_FRAME";
 const APPEND_FRAMES = "frameList/APPEND_FRAMES";
 const DELETE_FRAME = "frameList/DELETE_FRAME";
 
+const CHANGE_DOMINANT_COLOR = "frameList/CHANGE_DOMINANT_COLOR";
 const LOAD_CONTENT = "frameList/LOAD_CONTENT";
 const CLEAR_NORMAL_CONTENT = "frameList/CLEAR_NORMAL_CONTENT"
 const CLEAR_LARGE_CONTENT = "frameList/CLEAR_LARGE_CONTENT"
@@ -61,6 +63,7 @@ export const selectPriority = createAction(SELECT_PRIORITY)
 export const changePriority = createAction(CHANGE_PRIORITY)
 
 export const changeFrameOrder = createAction(CHANGE_FRAME_ORDER)
+export const updateFrameOrders = createAction(UPDATE_FRAME_ORDERS)
 export const setFrames = createAction(SET_FRAMES)
 export const appendFrames = createAction(APPEND_FRAMES)
 export const refreshFrames = createAction(REFRESH_FRAMES)
@@ -69,6 +72,7 @@ export const unselectFrame = createAction(UNSELECT_FRAME)
 export const updateFrame = createAction(UPDATE_FRAME)
 export const deleteFrame = createAction(DELETE_FRAME)
 
+export const changeDominantColor = createAction(CHANGE_DOMINANT_COLOR)
 export const loadContent = createAction(LOAD_CONTENT);
 export const clearNormalContent = createAction(CLEAR_NORMAL_CONTENT);
 export const clearLargeContent = createAction(CLEAR_LARGE_CONTENT)
@@ -166,6 +170,7 @@ const FrameRecored = Record({
     id: "",
     user: null,
     title: "",
+    dominant_color: "#000000",
     priority: null,
     scale_type: null,
     repeat_mode: null,
@@ -204,6 +209,7 @@ const itemToFrame = (frame) => {
         order: frame.order,
         priority: frame.priority,
         title: frame.title,
+        dominant_color: frame.dominant_color,
         scale_type: frame.scale_type,
         repeat_mode: frame.repeat_mode,
         content_type: frame.content_type,
@@ -336,6 +342,9 @@ export default handleActions({
         }
         return state.set("frames", frames)
     },
+    [UPDATE_FRAME_ORDERS]: (state) => {
+        return state.set("origin_frames", List(state.frames.toJS()))
+    },
     [SET_FRAMES]: (state, { payload: items }) => {
         const frames = itemsToFrames(items)
 
@@ -390,6 +399,21 @@ export default handleActions({
             frame: FrameRecored({ ...frame })
         })
     },
+    [DELETE_FRAME]: (state, { payload: frame }) => {
+        const origin_frames = state.origin_frames.filter(item => item.id !== frame.id)
+        const frames = state.frames.filter(item => item.id !== frame.id)
+
+        const origin = state.selected.origin
+        if (origin !== null && origin.id === frame.id) {
+            state = state.set("selected", SelectedRecord())
+        }
+
+        return state.merge({
+            page: PAGE_FRAME_LIST,
+            origin_frames: origin_frames,
+            frames: frames,
+        })
+    },
     [UNSELECT_FRAME]: (state) => {
         return state.merge({
             normal_image_loaded: false,
@@ -399,6 +423,9 @@ export default handleActions({
             origin: null,
             frame: FrameRecored()
         })
+    },
+    [CHANGE_DOMINANT_COLOR]: (state, { payload: color }) => {
+        return state.setIn(["selected", "frame", "dominant_color"], color)
     },
     [LOAD_CONTENT]: (state, { payload: list }) => {
         if (!list || list.length === 0) return state

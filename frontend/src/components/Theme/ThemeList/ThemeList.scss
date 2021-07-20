@@ -115,6 +115,17 @@
                     border: solid 1px #D86CFF;
                 }
             }
+
+            .selected{
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: rgba(216, 108, 255, 0.3);
+                border-radius: 6px;          
+                border: solid 1px #D86CFF;
+                position:absolute;
+            }
         }
 
         .theme-title{
@@ -123,7 +134,42 @@
             font-weight: 500;
             color:white;
         }
+    }
 
-        
+    .react-contextmenu{
+        width: 140px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0px;
+        border-radius: 6px;
+        background-color: white;
+        z-index: 1;
+
+        .react-contextmenu-item{
+            width: 100%;
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            cursor: pointer;
+
+            .frame-contextmenu-icon{
+                width: 18px;
+                height: 18px;
+                margin-left: 12px;
+            }
+
+            .frame-contextmenu-text{
+                margin-left: 12px;
+                font-size: 12px;
+                font-weight: 500;
+                color:#000000;
+            }
+
+            &:hover{
+                background-color: #eeeeee;
+            }
+        }
     }
 }

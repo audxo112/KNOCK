@@ -101,7 +101,7 @@ class FrameUploadPage extends Component {
         FrameUploadActions.loadContent(list)
     }
 
-    handleLargeOnLoaded = () => {
+    handleLargeOnLoaded = (color) => {
         const {
             large_content
         } = this.props.frame
@@ -114,10 +114,11 @@ class FrameUploadPage extends Component {
             large_content.height,
         )
 
+        FrameUploadActions.changeDominantColor(color)
         FrameUploadActions.setThumbnail(image)
     }
 
-    handleNormalOnLoaded = () => {
+    handleNormalOnLoaded = (color) => {
         const {
             large_content,
             normal_content,
@@ -131,6 +132,7 @@ class FrameUploadPage extends Component {
                 normal_content.width,
                 normal_content.height,
             )
+            FrameUploadActions.changeDominantColor(color)
             FrameUploadActions.setThumbnail(image)
         }
     }
@@ -291,6 +293,7 @@ class FrameUploadPage extends Component {
                         value={frame.large_content.content}
                         contentType={frame.large_content.content_type}
                         allowTypes={["image"]}
+                        enableColorThief={true}
                         onLoadFiles={this.handleContentOnLoadFiles}
                         onLoadedContent={this.handleLargeOnLoaded}
                         onClear={this.handleLargeOnClear} />
@@ -306,6 +309,7 @@ class FrameUploadPage extends Component {
                         value={frame.normal_content.content}
                         contentType={frame.normal_content.content_type}
                         allowTypes={["image"]}
+                        enableColorThief={true}
                         onLoadFiles={this.handleContentOnLoadFiles}
                         onLoadedContent={this.handleNormalOnLoaded}
                         onClear={this.handleNormalOnClear} />

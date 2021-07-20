@@ -168,7 +168,7 @@ class FrameListPage extends Component {
         FrameListActions.loadContent(list)
     }
 
-    handleLargeOnLoaded = () => {
+    handleLargeOnLoaded = (color) => {
         const {
             large_image_loaded
         } = this.props
@@ -186,10 +186,11 @@ class FrameListPage extends Component {
             large_content.height,
         )
 
+        FrameListActions.changeDominantColor(color)
         FrameListActions.setThumbnail(image)
     }
 
-    handleNormalOnLoaded = () => {
+    handleNormalOnLoaded = (color) => {
         const {
             normal_image_loaded
         } = this.props
@@ -212,6 +213,7 @@ class FrameListPage extends Component {
             normal_content.height
         )
 
+        FrameListActions.changeDominantColor(color)
         FrameListActions.setThumbnail(image)
     }
 
@@ -282,7 +284,6 @@ class FrameListPage extends Component {
         }, 300)
 
         const {
-            selected: { priority },
             origin_frames,
             frames
         } = this.props
@@ -293,7 +294,7 @@ class FrameListPage extends Component {
         ).then(() => {
             clearTimeout(loader)
             FrameListActions.changeEditLoading(false)
-            this.loadFrames(priority)
+            FrameListActions.updateFrameOrders()
         }).catch((error) => {
             clearTimeout(loader)
             FrameListActions.changeEditLoading(false)
@@ -334,27 +335,23 @@ class FrameListPage extends Component {
             FrameListActions.changeEditLoading(true)
         }, 300)
 
-        const { priority, frame } = this.props.selected
-
+        const { frame } = this.props.selected
         frameAPI.deleteFrame(
             frame.id
-        ).then(({ status }) => {
+        ).then(({ data, status }) => {
             clearTimeout(loader)
             FrameListActions.changeEditLoading(false)
-            this.loadFrames(priority, true)
             if (status === 200) {
-                FrameListActions.changePage(PAGE_FRAME_LIST)
+                FrameListActions.deleteFrame(data.item)
                 PopupActions.showMessage("프레임를 삭제했습니다")
             }
             else if (status === 204) {
+                FrameListActions.deleteFrame(frame)
                 PopupActions.showMessage("프레임를 찾을수 없습니다")
             }
         }).catch((error) => {
             clearTimeout(loader)
             FrameListActions.changeEditLoading(false)
-            const r = error.response
-            if (r && r.status === 400)
-                this.loadFrames(frame.priority, true)
             PopupActions.showResponseError(error)
         })
     }
@@ -415,7 +412,6 @@ class FrameListPage extends Component {
 
     handleUpdateConfirm = () => {
         const {
-            priority,
             frame,
             origin,
         } = this.props.selected
@@ -431,20 +427,16 @@ class FrameListPage extends Component {
             clearTimeout(loader)
             FrameListActions.changeEditLoading(false)
             if (status === 200) {
-                FrameListActions.updateFrame(data)
-                this.loadFrames(data.priority, true)
+                FrameListActions.updateFrame(data.item)
                 PopupActions.showMessage("프레임을 수정했습니다.")
             }
             else if (status === 204) {
-                this.loadFrames(priority, true)
-                PopupActions.showMessage("프레임을 찾을수 없습니다.")
+                FrameListActions.deleteFrame(frame)
+                PopupActions.showMessage("존재하지 않는 프레임입니다.")
             }
         }).catch((error) => {
             clearTimeout(loader)
             FrameListActions.changeEditLoading(false)
-            const r = error.response
-            if (r && r.status === 400)
-                this.loadFrames(priority, true)
             PopupActions.showResponseError(error)
         })
     }
@@ -473,11 +465,8 @@ class FrameListPage extends Component {
 
     componentDidMount() {
         const load = async (observer) => {
-            try {
-                await this.loadMaxPriority()
-                await this.loadFrames(1)
-            }
-            catch (err) { }
+            await this.loadMaxPriority()
+            await this.loadFrames(1)
             if (observer && this.lastElementRef.current) {
                 observer.observe(this.lastElementRef.current)
             }
@@ -496,6 +485,9 @@ class FrameListPage extends Component {
 
     componentWillUnmount() {
         FrameListActions.clearPage()
+
+        if (this.lastElementRef.current)
+            this.observer.unobserve(this.lastElementRef.current)
     }
 
     render() {
@@ -535,6 +527,7 @@ class FrameListPage extends Component {
                 }
                 frameList={
                     <FrameList
+                        lastRef={this.lastElementRef}
                         items={frames}
                         selected={origin}
                         loading={frames_loading}
@@ -612,6 +605,7 @@ class FrameListPage extends Component {
                         value={large_content}
                         contentType={frame.large_content.content_type}
                         allowTypes={["image"]}
+                        enableColorThief={true}
                         onLoadFiles={this.handleContentOnLoadFiles}
                         onLoadedContent={this.handleLargeOnLoaded}
                         onClear={this.handleLargeOnClear}
@@ -629,6 +623,7 @@ class FrameListPage extends Component {
                         value={normal_content}
                         contentType={frame.normal_content.content_type}
                         allowTypes={["image"]}
+                        enableColorThief={true}
                         onLoadFiles={this.handleContentOnLoadFiles}
                         onLoadedContent={this.handleNormalOnLoaded}
                         onClear={this.handleNormalOnClear}

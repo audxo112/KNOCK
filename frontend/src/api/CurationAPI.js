@@ -145,6 +145,7 @@ class CurationAPI {
             sub_title: folder.sub_title,
             description: folder.description,
             group_id: group.id,
+            dominant_color: folder.dominant_color,
             orders: orders,
             covers: [
                 thumbnailToItem(folder.origin_cover),
@@ -178,8 +179,6 @@ class CurationAPI {
             return origin && origin.order !== item.order
         }).toJS()
 
-        console.log(orders)
-
         if (folder_index === null) {
             return axios.put(
                 `${HOST}/api/curations/folder/`, orders, JSONConfig()
@@ -204,6 +203,9 @@ class CurationAPI {
         }
         if (folder.description !== origin.description) {
             data["description"] = folder.description
+        }
+        if (folder.dominant_color !== origin.dominant_color) {
+            data["dominant_color"] = folder.dominant_color
         }
         if (orders.length > 0) {
             data["orders"] = orders

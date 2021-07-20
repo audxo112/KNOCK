@@ -20,7 +20,7 @@ import {
 } from "store/actionCreators"
 
 import { themeAPI, editorUserAPI } from "api";
-import { PAGE_THEME_LIST } from "const/page"
+import { PAGE_THEME_DETAIL, PAGE_THEME_LIST } from "const/page"
 
 
 class ThemeListPage extends Component {
@@ -137,20 +137,26 @@ class ThemeListPage extends Component {
     }
 
     handleUpdateConfirm = () => {
+        const { origin, theme } = this.props
+
         const loader = setTimeout(() => {
             ThemeListActions.changeEditLoading(true)
         }, 300)
 
-        const { origin, theme } = this.props
-
         themeAPI.updateTheme(
             origin,
             theme,
-        ).then(({ data }) => {
+        ).then(({ data, status }) => {
             clearTimeout(loader)
             ThemeListActions.changeEditLoading(false)
-            ThemeListActions.updateTheme(data.item)
-            PopupActions.showMessage("수정이 완료됬습니다.")
+            if (status === 200) {
+                ThemeListActions.updateTheme(data.item)
+                PopupActions.showMessage("테마를 수정했습니다.")
+            }
+            else if (status === 204) {
+                ThemeListActions.deleteTheme(theme)
+                PopupActions.showMessage("존재하지 않는 테마입니다.")
+            }
         }).catch((error) => {
             clearTimeout(loader)
             ThemeListActions.changeEditLoading(false)
@@ -224,8 +230,30 @@ class ThemeListPage extends Component {
         ThemeListActions.changeSearch(value)
     }
 
+    handleOnOutClickTheme = () => {
+        ThemeListActions.unselectTheme()
+    }
+
     handleClickTheme = (theme) => {
         ThemeListActions.selectTheme(theme)
+    }
+
+    handleDoubleClickTheme = () => {
+        ThemeListActions.changePage(PAGE_THEME_DETAIL)
+    }
+
+    handleOnMenuShowTheme = (theme) => {
+        ThemeListActions.selectTheme(theme)
+    }
+
+    handleGotoUpdateTheme = (theme) => {
+        ThemeListActions.selectTheme(theme)
+        ThemeListActions.changePage(PAGE_THEME_DETAIL)
+    }
+
+    handleGotoDeleteTheme = (theme) => {
+        ThemeListActions.selectTheme(theme)
+        this.handleDeleteTheme(theme)
     }
 
     handleClickBack = () => {
@@ -376,6 +404,10 @@ class ThemeListPage extends Component {
         }
     }
 
+    handleThumbnailOnLoaded = (color) => {
+        ThemeListActions.changeDominantColor(color)
+    }
+
     handleCaputreContent = () => {
         const {
             large_content,
@@ -422,8 +454,12 @@ class ThemeListPage extends Component {
     observer = null;
 
     componentDidMount() {
-        this.loadUsers()
-        this.loadRecentLinks()
+        const load = async (observer) => {
+            await this.loadThemes()
+            if (observer && this.lastElementRef.current) {
+                observer.observe(this.lastElementRef.current)
+            }
+        }
 
         this.observer = new IntersectionObserver(
             this.handleInfiniteScrolling, {
@@ -431,12 +467,8 @@ class ThemeListPage extends Component {
             threshold: 0.5,
         })
 
-        const load = async (observer) => {
-            await this.loadThemes()
-            if (this.lastElementRef.current) {
-                observer.observe(this.lastElementRef.current)
-            }
-        }
+        this.loadUsers()
+        this.loadRecentLinks()
 
         load(this.observer)
     }
@@ -462,13 +494,13 @@ class ThemeListPage extends Component {
             users,
             tag,
             recent_links,
+            origin,
             theme,
         } = this.props
 
         if (page === PAGE_THEME_LIST) {
             return (
                 <ThemeListTemplate
-                    innerRef={this.templateRef}
                     showSearch={show_search}
                     searchButton={
                         <ImageButton
@@ -495,7 +527,13 @@ class ThemeListPage extends Component {
                             lastRef={this.lastElementRef}
                             header={theme_headers}
                             items={themes}
-                            onClick={this.handleClickTheme} />
+                            selected={origin}
+                            onOutClick={this.handleOnOutClickTheme}
+                            onClick={this.handleClickTheme}
+                            onDoubleClick={this.handleDoubleClickTheme}
+                            onMenuShow={this.handleOnMenuShowTheme}
+                            onUpdate={this.handleGotoUpdateTheme}
+                            onDelete={this.handleGotoDeleteTheme} />
                     } />
             )
         }
@@ -582,7 +620,9 @@ class ThemeListPage extends Component {
                             height: "493px",
                         }}
                         enableDropDown={false}
-                        enableClearBtn={false} />
+                        enableClearBtn={false}
+                        enableColorThief={true}
+                        onLoadedContent={this.handleThumbnailOnLoaded} />
                 }
                 captureBtn={
                     <Button
@@ -672,6 +712,9 @@ export default connect(
                 theme.default_thumbnail.image !== "" &&
                 theme.mini_thumbnail.image !== ""
             )
+
+            console.log(theme.origin_thumbnail.toJS())
+
             const valid_content = (
                 (
                     theme.normal_content.content !== "" &&
@@ -689,6 +732,12 @@ export default connect(
             const clear_large = (
                 theme.large_content === "" &&
                 theme.large_content.content !== origin.larget_content.content
+            )
+
+            const update_thumbnail = (
+                theme.origin_thumbnail.image !== origin.origin_thumbnail.image &&
+                theme.default_thumbnail.image !== origin.default_thumbnail.image &&
+                theme.mini_thumbnail.image !== origin.mini_thumbnail.image
             )
 
             const update_content = (
@@ -710,6 +759,7 @@ export default connect(
                     update_tag ||
                     update_link ||
                     update_post ||
+                    update_thumbnail ||
                     update_content
                 )
             )

@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import Label from "components/Label";
 import { DEBUG } from "const/core";
 import { deepEqual } from "utils/equals";
+import ColorThief from 'colorthief'
 
 const cx = classNames.bind(styles);
 
@@ -31,13 +32,14 @@ class ContentView extends Component {
         enable: true,
         enableDropDown: true,
         enableClearBtn: true,
+        enableColorThief: false,
         onLoadFiles: (list) => {
             if (DEBUG)
                 console.log("onLoadFiles is not implements", list)
         },
-        onLoadedContent: () => {
+        onLoadedContent: (dominantColor) => {
             if (DEBUG)
-                console.log("onLoadedContent is not implements")
+                console.log("onLoadedContent is not implements", dominantColor)
         },
         onClear: () => {
             if (DEBUG)
@@ -346,14 +348,29 @@ class ContentView extends Component {
 
     loadedData = null
 
+    digitToHex = (val) => {
+        return ("00" + val.toString(16)).substr(-2).toUpperCase();
+    }
+
+    arrToColor = (arr) => {
+        return `#${this.digitToHex(arr[0])}${this.digitToHex(arr[1])}${this.digitToHex(arr[2])}`
+    }
+
     handleLoadedData = () => {
-        const { onLoadedContent } = this.props
+        const { enableColorThief, onLoadedContent } = this.props
         if (this.loadedData)
             clearTimeout(this.loadedData)
 
         this.loadedData = setTimeout(() => {
             this.loadedData = null
-            onLoadedContent()
+            if (enableColorThief) {
+                const thief = new ColorThief()
+                const color = thief.getColor(this.contentRef.current)
+                onLoadedContent(this.arrToColor(color))
+            }
+            else {
+                onLoadedContent()
+            }
         }, 300)
     }
 

@@ -34,6 +34,7 @@ class EditorUserAPI {
 
         const data = {
             nickname: user.nickname,
+            dominant_color: user.dominant_color,
             avatars: [
                 thumbnailToItem(user.origin_avatar),
                 thumbnailToItem(user.default_avatar),
@@ -63,6 +64,12 @@ class EditorUserAPI {
 
         if (user.nickname !== origin.nickname) {
             data["nickname"] = user.nickname
+        }
+
+        console.log(user.dominant_color, origin.dominant_color)
+
+        if (user.dominant_color !== origin.dominant_color) {
+            data["dominant_color"] = user.dominant_color
         }
 
         if (user.is_visibility !== origin.is_visibility) {

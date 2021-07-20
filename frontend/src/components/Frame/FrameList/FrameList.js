@@ -11,6 +11,7 @@ const cx = classNames.bind(styles)
 
 class FrameItem extends Component {
     static defaultProps = {
+        innerRef: null,
         item: {
             id: "",
             user: null,
@@ -205,7 +206,7 @@ class FrameItem extends Component {
 
     renderUser() {
         const { user } = this.props.item
-        const avatar = this.getUserAvatar(user)
+        const avatar = this.getUserAvatar()
 
         return (
             <div className={cx("user-wrap")}>
@@ -227,8 +228,10 @@ class FrameItem extends Component {
     }
 
     render() {
+        const { innerRef } = this.props
         return (
-            <div className={cx("frame-item-wrap")}>
+            <div ref={innerRef}
+                className={cx("frame-item-wrap")}>
                 {this.renderThumbnail()}
                 {this.renderFrameInfo()}
                 {this.renderUser()}
@@ -237,8 +240,9 @@ class FrameItem extends Component {
     }
 }
 
-const SortableFrameItem = SortableElement(({ item, selected, onClick, onDoubleClick, onMenuShow, onUpdate, onDelete }) => {
+const SortableFrameItem = SortableElement(({ innerRef, item, selected, onClick, onDoubleClick, onMenuShow, onUpdate, onDelete }) => {
     return <FrameItem
+        innerRef={innerRef}
         key={item.id}
         item={item}
         selected={selected}
@@ -250,11 +254,13 @@ const SortableFrameItem = SortableElement(({ item, selected, onClick, onDoubleCl
     />
 })
 
-const SortableFrameList = SortableContainer(({ items, selected, onClick, onDoubleClick, onMenuShow, onUpdate, onDelete }) => {
+const SortableFrameList = SortableContainer(({ lastRef, items, selected, onClick, onDoubleClick, onMenuShow, onUpdate, onDelete }) => {
     const selected_id = selected ? selected.id : null
     const list = items.map((item, index) => {
+        const isLast = index === items.size - 1
         return (
             <SortableFrameItem
+                innerRef={isLast ? lastRef : null}
                 key={item.id}
                 index={index}
                 item={item}
@@ -274,6 +280,7 @@ const SortableFrameList = SortableContainer(({ items, selected, onClick, onDoubl
 
 class FrameList extends Component {
     static defaultProps = {
+        lastRef: null,
         items: List(),
         selected: null,
         loading: false,
@@ -327,7 +334,7 @@ class FrameList extends Component {
     }
 
     render() {
-        const { loading, items, selected, onOutClick, onClick, onDoubleClick, onMenuShow, onUpdate, onDelete } = this.props
+        const { lastRef, loading, items, selected, onOutClick, onClick, onDoubleClick, onMenuShow, onUpdate, onDelete } = this.props
 
         return <div className={cx("frame-list-wrap")}
             onClick={onOutClick}>
@@ -338,6 +345,7 @@ class FrameList extends Component {
                 </div>
             ) : (
                 <SortableFrameList
+                    lastRef={lastRef}
                     items={items}
                     axis="xy"
                     lockAxis="xy"

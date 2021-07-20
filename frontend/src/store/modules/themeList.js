@@ -18,6 +18,7 @@ const CHANGE_SEARCH = "themeList/CHANGE_SEARCH"
 const SET_THEMES = "themeList/SET_THEMES"
 const APPEND_THEMES = "themeList/APPEND_THEMES"
 const SELECT_THEME = "themeList/SELECT_THEME"
+const UNSELECT_THEME = "themeList/UNSELECT_THEME"
 const UPDATE_THEME = "themeList/UPDATE_THEME"
 const DELETE_THEME = "themeList/DELETE_THEME"
 
@@ -35,6 +36,7 @@ const SET_RECENT_LINKS = "themeList/SET_RECENT_LINKS"
 const CHANGE_POST_START = "themeList/CHANGE_POST_START"
 const CHANGE_POST_END = "themeList/CHANGE_POST_END"
 
+const CHANGE_DOMINANT_COLOR = "themeList/CHANGE_DOMINANT_COLOR"
 const LOAD_CONTENT = "themeList/LOAD_CONTENT"
 const SET_LARGE_PRELOAD = "themeList/SET_LARGE_PRELOAD"
 const SET_NORMAL_PRELOAD = "themeList/SET_NORMAL_PRELOAD"
@@ -61,6 +63,7 @@ export const changeSearch = createAction(CHANGE_SEARCH)
 export const setThemes = createAction(SET_THEMES)
 export const appendThemes = createAction(APPEND_THEMES)
 export const selectTheme = createAction(SELECT_THEME)
+export const unselectTheme = createAction(UNSELECT_THEME)
 export const updateTheme = createAction(UPDATE_THEME)
 export const deleteTheme = createAction(DELETE_THEME)
 
@@ -78,6 +81,7 @@ export const setRecentLinks = createAction(SET_RECENT_LINKS)
 export const changePostStart = createAction(CHANGE_POST_START)
 export const changePostEnd = createAction(CHANGE_POST_END)
 
+export const changeDominantColor = createAction(CHANGE_DOMINANT_COLOR)
 export const loadContent = createAction(LOAD_CONTENT)
 export const setLargePreload = createAction(SET_LARGE_PRELOAD)
 export const setNormalPreload = createAction(SET_NORMAL_PRELOAD)
@@ -128,6 +132,7 @@ const ThemeRecord = Record({
     id: "",
     user: null,
     title: "",
+    dominant_color: "#000000",
     tags: List([]),
     link: "",
     post_start: dateToStr(new Date()),
@@ -219,6 +224,7 @@ const itemToTheme = (theme) => {
         id: theme.id,
         user: itemToUser(theme.owner),
         title: theme.title,
+        dominant_color: theme.dominant_color,
         tags: itemsToTags(theme.tags),
         link: theme.link,
         post_start: theme.post_start_datetime,
@@ -394,9 +400,17 @@ export default handleActions({
             loaded_large_content: theme.large_content === "",
             loaded_normal_content: theme.normal_content === "",
             tag: "",
-            page: PAGE_THEME_DETAIL,
             origin: itemToTheme(theme),
             theme: itemToTheme(theme),
+        })
+    },
+    [UNSELECT_THEME]: (state) => {
+        return state.merge({
+            loaded_large_content: false,
+            loaded_normal_content: false,
+            tag: "",
+            origin: null,
+            theme: ThemeRecord(),
         })
     },
     [UPDATE_THEME]: (state, { payload: theme }) => {
@@ -497,6 +511,9 @@ export default handleActions({
     },
     [CHANGE_POST_END]: (state, { payload: post_end }) => {
         return state.setIn(["theme", "post_end"], post_end)
+    },
+    [CHANGE_DOMINANT_COLOR]: (state, { payload: color }) => {
+        return state.setIn(["theme", "dominant_color"], color)
     },
     [LOAD_CONTENT]: (state, { payload: list }) => {
         if (!list || list.length === 0)
