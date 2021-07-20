@@ -42,7 +42,7 @@ class RandomMixin(object):
         cursor.close()
 
 
-class ThemeList(RandomMixin, APIView):
+class ThemeList(APIView, RandomMixin):
     permission_classes = (AllowAny,)
 
     def get(self, request):
