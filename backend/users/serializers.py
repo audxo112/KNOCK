@@ -75,6 +75,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "nickname",
+            "dominant_color",
             "email",
             "grade",
             "order",

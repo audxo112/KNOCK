@@ -74,6 +74,7 @@ class ThemeCurationFolderAdmin(core_admin.FleetAdmin):
                     "title",
                     "sub_title",
                     "description",
+                    "dominant_color",
                     "order",
                     "group",
                 )

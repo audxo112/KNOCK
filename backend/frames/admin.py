@@ -63,6 +63,7 @@ class ThemeFrameAdmin(core_admin.FleetAdmin):
             {
                 "fields": (
                     "title",
+                    "dominant_color",
                     "scale_type",
                     "repeat_mode",
                     "priority",
@@ -76,6 +77,7 @@ class ThemeFrameAdmin(core_admin.FleetAdmin):
                 "fields": (
                     "is_verified",
                     "is_pending",
+                    "is_public",
                     "post_start_datetime",
                     "post_end_datetime",
                 )

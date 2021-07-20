@@ -87,6 +87,8 @@ class ThemeSerializer(serializers.ModelSerializer):
             "link",
             "is_verified",
             "is_pending",
+            "is_public",
+            "dominant_color",
             "post_start_datetime",
             "post_end_datetime",
             "owner",

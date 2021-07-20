@@ -19,11 +19,19 @@ class Theme(core_models.FleetRandomIDModels):
         default=False,
         help_text=_("신고등의 이유로 게시가 보류가 됬는지 여부"),
     )
+    is_public = models.BooleanField(
+        _("공개 여부"),
+        default=True,
+        help_text=_("신고등의 이유로 게시가 보류가 됬는지 여부"),
+    )
+
+    dominant_color = models.CharField(_("대표색"), max_length=7, default="#000000")
 
     post_start_datetime = models.DateTimeField(
         _("게시 시작일"),
         default=timezone.now,
     )
+
     post_end_datetime = models.DateTimeField(
         _("게시 종료일"),
         default=core_models.default_end_date,

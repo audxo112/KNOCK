@@ -10,6 +10,8 @@ class ThemeManager(managers.CustomManager):
         instance.link = kwargs.get("link", instance.link)
         instance.is_verified = kwargs.get("is_verified", instance.is_verified)
         instance.is_pending = kwargs.get("is_pending", instance.is_pending)
+        instance.is_public = kwargs.get("is_public", instance.is_public)
+        instance.dominant_color = kwargs.get("dominant_color", instance.dominant_color)
         instance.post_start_datetime = kwargs.get(
             "post_start_datetime", instance.post_start_datetime
         )

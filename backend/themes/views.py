@@ -1,8 +1,6 @@
 import pprint
 import json
-import random
 from datetime import datetime
-from django.db import connection
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage
 from rest_framework import status
@@ -10,40 +8,21 @@ from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . import models, serializers
+from core.mixins import RandomMixin
 from api.permissions import IsEditor, IsThemeOwnerOrEditor
-
-
-class RandomMixin(object):
-    def get_seed(self):
-        if not self.request.session.get("seed"):
-            return self.generate_seed()
-        else:
-            return self.request.session.get("seed")
-
-    def generate_seed(self):
-        self.request.session["seed"] = random.random()
-        return self.request.session["seed"]
-
-    def postgres_setseed(self):
-        cursor = connection.cursor()
-        cursor.execute("SELECT setseed(%s);" % (self.seed,))
-        cursor.close()
 
 
 class ThemeList(APIView, RandomMixin):
     permission_classes = (AllowAny,)
 
     def get(self, request):
-        print("second theme list")
         page = request.GET.get("page", 1)
         offset = request.GET.get("offset", 20)
-        if not page or page == "1":
-            self.generate_seed()
-        self.seed = self.get_seed()
+        self.apply_random(page)
 
-        self.postgres_setseed()
         theme_list = models.Theme.objects.filter(
             is_pending=False,
+            is_public=True,
             owner__upload_stop_period__lte=datetime.now(),
             post_start_datetime__lte=datetime.now(),
             post_end_datetime__gte=datetime.now(),

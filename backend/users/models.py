@@ -103,6 +103,8 @@ class User(core_models.FleetUserModels):
         help_text=_("해당 유저 관련 정보의 노출 여부, 기본값 True"),
     )
 
+    dominant_color = models.CharField(_("대표색"), max_length=7, default="#000000")
+
     upload_stop_period = models.DateTimeField(
         _("업로드 정지 기한"),
         default=timezone.now,

@@ -106,11 +106,13 @@ class ThemeFrameSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "title",
+            "dominant_color",
             "scale_type",
             "repeat_mode",
             "priority",
             "is_verified",
             "is_pending",
+            "is_public",
             "thumbnails",
             "contents",
             "delete_contents",

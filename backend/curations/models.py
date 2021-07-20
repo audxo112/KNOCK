@@ -89,6 +89,8 @@ class ThemeCurationFolder(core_models.FleetRandomIDModels):
         default="",
     )
 
+    dominant_color = models.CharField(_("대표색"), max_length=7, default="#000000")
+
     order = models.PositiveIntegerField(
         _("순서"),
         default=1,

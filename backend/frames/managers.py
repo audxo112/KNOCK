@@ -8,6 +8,8 @@ class FrameManager(managers.CustomManager):
 
         instance.is_verified = kwargs.get("is_verified", instance.is_verified)
         instance.is_pending = kwargs.get("is_pending", instance.is_pending)
+        instance.is_public = kwargs.get("is_public", instance.is_public)
+        instance.dominant_color = kwargs.get("dominant_color", instance.dominant_color)
         instance.title = kwargs.get("title", instance.title)
         instance.scale_type = kwargs.get("scale_type", instance.scale_type)
         instance.repeat_mode = kwargs.get("repeat_mode", instance.repeat_mode)

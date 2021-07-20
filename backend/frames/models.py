@@ -39,6 +39,13 @@ class ThemeFrame(core_models.FleetRandomIDModels):
         default=False,
         help_text=_("신고등의 이유로 게시가 보류가 됬는지 여부"),
     )
+    is_public = models.BooleanField(
+        _("공개 여부"),
+        default=False,
+        help_text=_("신고등의 이유로 게시가 보류가 됬는지 여부"),
+    )
+
+    dominant_color = models.CharField(_("대표색"), max_length=7, default="#000000")
 
     scale_type = models.CharField(
         _("스케일 타입"),

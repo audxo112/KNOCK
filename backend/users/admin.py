@@ -43,6 +43,7 @@ class UserAdmin(core_admin.FleetUserAdmin):
                     "change_password",
                     "nickname",
                     "nickname_value",
+                    "dominant_color",
                     "order",
                     "email",
                     "grade",

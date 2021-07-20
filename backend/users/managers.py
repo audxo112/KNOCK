@@ -19,6 +19,7 @@ class UserManager(managers.CustomUserManager):
         instance.nickname = kwargs.get("nickname", instance.nickname)
         instance.email = kwargs.get("email", instance.email)
         instance.grade = kwargs.get("grade", instance.grade)
+        instance.dominant_color = kwargs.get("dominant_color", instance.dominant_color)
         instance.is_visibility = kwargs.get("is_visibility", instance.is_visibility)
         instance.is_verified = kwargs.get("is_verified", instance.is_verified)
         instance.upload_stop_period = kwargs.get(

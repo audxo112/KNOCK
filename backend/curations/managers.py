@@ -47,6 +47,7 @@ class FolderManager(managers.CustomManager):
         instance.title = kwargs.get("title", instance.title)
         instance.sub_title = kwargs.get("sub_title", instance.sub_title)
         instance.description = kwargs.get("description", instance.description)
+        instance.dominant_color = kwargs.get("dominant_color", instance.dominant_color)
         instance.save()
 
         return instance
