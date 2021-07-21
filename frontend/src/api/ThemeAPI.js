@@ -61,6 +61,9 @@ class ThemeAPI {
             ]
         }
 
+        console.log("test")
+        console.log(theme.dominant_color)
+
         if (normal_preload_file !== null && normal_content_file !== null) {
             form.append("normal_preload", normal_preload_file, normal_preload_file.name)
             form.append("normal_content", normal_content_file, normal_content_file.name)

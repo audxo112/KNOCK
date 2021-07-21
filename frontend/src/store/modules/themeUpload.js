@@ -110,6 +110,7 @@ const ThemeRecord = Record({
     link: "",
     group: null,
     folder: null,
+    dominant_color: "#000000",
     post_start: dateToStr(new Date()),
     post_end: dateToStr(new Date(), 20),
     origin_thumbnail: ImageRecord(),
