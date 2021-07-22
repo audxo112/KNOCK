@@ -32,7 +32,14 @@ class ThemeList(APIView, RandomMixin):
 
         try:
             serializer = serializers.ThemeSerializer(paginator.page(page), many=True)
-            return Response({"items": serializer.data}, status=status.HTTP_200_OK)
+            return Response(
+                {
+                    "items": serializer.data,
+                    "current_page": page,
+                    "total_page": paginator.num_pages,
+                },
+                status=status.HTTP_200_OK,
+            )
         except EmptyPage:
             return Response(status=status.HTTP_204_NO_CONTENT)
 
