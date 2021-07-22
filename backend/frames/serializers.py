@@ -156,7 +156,7 @@ class ThemeFrameSerializer(serializers.ModelSerializer):
     def get_thumbnail(self, obj, size):
         thumbnail = obj.thumbnails.filter(image_size_type=size).first()
         if thumbnail is None:
-            return ""
+            return None
         return ThemeFrameThumbnailSerializer(thumbnail).data
 
     def get_origin_thumbnail(self, obj):
@@ -186,7 +186,7 @@ class ThemeFrameSerializer(serializers.ModelSerializer):
     def get_content(self, obj, size):
         content = obj.contents.filter(screen_size=size).first()
         if content is None:
-            return ""
+            return None
         return ThemeFrameContentSerializer(content).data
 
     def get_normal_content(self, obj):

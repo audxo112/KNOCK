@@ -222,6 +222,14 @@ class ThemeListPage extends Component {
         ThemeListActions.changeShowSearch(false)
     }
 
+    digitToHex = (val) => {
+        return ("00" + val.toString(16)).substr(-2).toUpperCase();
+    }
+
+    arrToColor = (arr) => {
+        return `#${this.digitToHex(arr[0])}${this.digitToHex(arr[1])}${this.digitToHex(arr[2])}`
+    }
+
     handleShowSearch = () => {
         ThemeListActions.changeShowSearch(true)
     }

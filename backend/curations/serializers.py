@@ -242,7 +242,7 @@ class FolderSerializer(serializers.ModelSerializer):
     def get_cover(self, obj, size):
         cover = obj.covers.filter(image_size_type=size).first()
         if cover is None:
-            return ""
+            return None
         return FolderCoverSerializer(cover).data
 
     def get_origin_cover(self, obj):

@@ -148,13 +148,13 @@ class ThemeSerializer(serializers.ModelSerializer):
     def get_content_type(self, obj):
         content = obj.contents.first()
         if content is None:
-            return ""
+            return None
         return content.content_type
 
     def get_content(self, obj, size):
         content = obj.contents.filter(screen_size=size).first()
         if content is None:
-            return ""
+            return None
         return ThemeContentSerializer(content).data
 
     def get_normal_content(self, obj):

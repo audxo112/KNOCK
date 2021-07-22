@@ -169,5 +169,6 @@
       "react-app"
     ]
   },
+  "proxy": "https://knockconsole.com",
   "devDependencies": {}
 }

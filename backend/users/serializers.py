@@ -115,7 +115,7 @@ class UserSerializer(serializers.ModelSerializer):
     def get_avatar(self, obj, size):
         avatar = obj.avatars.filter(image_size_type=size).first()
         if avatar is None:
-            return ""
+            return None
         return UserAvatarSerializer(avatar).data
 
     def get_origin_avatar(self, obj):
