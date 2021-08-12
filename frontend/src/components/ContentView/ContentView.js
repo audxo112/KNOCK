@@ -381,6 +381,7 @@ class ContentView extends Component {
         const content = this.contentRef.current
         if (!content) return 0
 
+        const { contentType } = this.props
         if (contentType.indexOf("video") !== -1) {
             setTimeout(() => {
                 content.play()
