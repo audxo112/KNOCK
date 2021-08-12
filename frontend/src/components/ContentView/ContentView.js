@@ -29,6 +29,7 @@ class ContentView extends Component {
         imageStyle: {
             objectFit: "contain",
         },
+        autoPlay: true,
         enable: true,
         enableDropDown: true,
         enableClearBtn: true,
@@ -371,7 +372,20 @@ class ContentView extends Component {
             else {
                 onLoadedContent()
             }
+
+            this._videoPlayDelayed()
         }, 300)
+    }
+
+    _videoPlayDelayed = () => {
+        const content = this.contentRef.current
+        if (!content) return 0
+
+        if (contentType.indexOf("video") !== -1) {
+            setTimeout(() => {
+                content.play()
+            }, 1000)
+        }
     }
 
     handleOnClear = () => {
@@ -444,7 +458,7 @@ class ContentView extends Component {
     }
 
     _renderVideoView() {
-        const { value, default_value } = this.props
+        const { value, default_value, autoPlay } = this.props
         if (value === "") {
             if (default_value === "") return null
 
@@ -456,7 +470,7 @@ class ContentView extends Component {
 
         return <video className={cx("video-view")}
             loop controls
-            autoPlay={true}
+            autoPlay={autoPlay}
             src={value}
             ref={this.contentRef}
             onLoadedData={this.handleLoadedData} />

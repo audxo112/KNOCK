@@ -650,6 +650,7 @@ class ThemeListPage extends Component {
                             width: "240px",
                             height: "493px",
                         }}
+                        autoPlay={false}
                         value={theme.large_content.content}
                         contentType={theme.large_content.content_type}
                         onLoadFiles={this.handleContentOnLoadFiles}
@@ -664,6 +665,7 @@ class ThemeListPage extends Component {
                             width: "240px",
                             height: "426px",
                         }}
+                        autoPlay={false}
                         value={theme.normal_content.content}
                         contentType={theme.normal_content.content_type}
                         onLoadFiles={this.handleContentOnLoadFiles}
