@@ -193,7 +193,7 @@ const itemsToTags = (items) => {
 }
 
 const itemToThumbnail = (item) => {
-    if (!itme) return ImageRecord()
+    if (!item) return ImageRecord()
     return ImageRecord({
         file: null,
         image_size_type: item.image_size_type,
@@ -206,7 +206,7 @@ const itemToThumbnail = (item) => {
 }
 
 const itemToContent = (item) => {
-    if (!itme) return ContentRecord()
+    if (!item) return ContentRecord()
     return ContentRecord({
         screen_size: item.screen_size,
         preload_file: null,
