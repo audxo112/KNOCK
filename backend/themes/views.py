@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage
 from rest_framework import status
 from rest_framework.permissions import AllowAny
+from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . import models, serializers
@@ -18,6 +19,7 @@ class ThemeList(APIView, RandomMixin):
     def get(self, request):
         page = request.GET.get("page", 1)
         offset = request.GET.get("offset", 20)
+
         self.apply_random(page)
 
         theme_list = models.Theme.objects.filter(
@@ -140,6 +142,24 @@ class SearchTag(APIView):
         # 사용된 수 같은 order 추가하기!
 
         serializer = serializers.TagSerializer(tags, many=True)
+        return Response(
+            {"items": serializer.data},
+            status=status.HTTP_200_OK,
+        )
+
+
+class ThemeSearch(APIView):
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        items = request.GET.getlist("items[]", None)
+        if items is None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        themes = models.Theme.objects.filter(pk__in=items)
+
+        serializer = serializers.ThemeSerializer(themes, many=True)
+
         return Response(
             {"items": serializer.data},
             status=status.HTTP_200_OK,
