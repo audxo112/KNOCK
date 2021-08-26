@@ -5,19 +5,19 @@ import { HOST, JSONConfig, MultipartConfig, thumbnailToItem } from "./apiBase"
 class CurationAPI {
     getCurations = () => {
         return axios.get(
-            `${HOST}/api/curations/menu/`, JSONConfig()
+            `${HOST}/api/curations/menu`, JSONConfig()
         )
     }
 
     getGroups = (isActive) => {
         if (isActive === undefined) {
             return axios.get(
-                `${HOST}/api/curations/group/`, JSONConfig()
+                `${HOST}/api/curations/group`, JSONConfig()
             )
         }
 
         return axios.get(
-            `${HOST}/api/curations/group/?is_active=${isActive}`, JSONConfig()
+            `${HOST}/api/curations/group?is_active=${isActive}`, JSONConfig()
         )
     }
 
@@ -38,7 +38,7 @@ class CurationAPI {
         }).toJS()
 
         return axios.post(
-            `${HOST}/api/curations/group/`, {
+            `${HOST}/api/curations/group`, {
             title: group.title,
             post_start_datetime: `${group.post_start_datetime}T09:00:00.0`,
             post_end_datetime: `${group.post_end_datetime}T09:00:00.0`,
@@ -67,7 +67,7 @@ class CurationAPI {
 
         if (group_index === null) {
             return axios.put(
-                `${HOST}/api/curations/group/`, orders, JSONConfig()
+                `${HOST}/api/curations/group`, orders, JSONConfig()
             )
         }
 
@@ -88,7 +88,7 @@ class CurationAPI {
             updateData["orders"] = orders
 
         return axios.put(
-            `${HOST}/api/curations/group/${group.id}/`, updateData, JSONConfig()
+            `${HOST}/api/curations/group/${group.id}`, updateData, JSONConfig()
         )
     }
 
@@ -96,19 +96,19 @@ class CurationAPI {
         id
     ) => {
         return axios.delete(
-            `${HOST}/api/curations/group/${id}/`, JSONConfig()
+            `${HOST}/api/curations/group/${id}`, JSONConfig()
         )
     }
 
     getFolders = (group_id) => {
         if (group_id === undefined) {
             return axios.get(
-                `${HOST}/api/curations/folder/`, JSONConfig()
+                `${HOST}/api/curations/folder`, JSONConfig()
             )
         }
 
         return axios.get(
-            `${HOST}/api/curations/folder/?group_id=${group_id}`, JSONConfig()
+            `${HOST}/api/curations/folder?group_id=${group_id}`, JSONConfig()
         )
     }
 
@@ -158,7 +158,7 @@ class CurationAPI {
         form.append("data", JSON.stringify(data))
 
         return axios.post(
-            `${HOST}/api/curations/folder/`, form, MultipartConfig()
+            `${HOST}/api/curations/folder`, form, MultipartConfig()
         )
     }
 
@@ -181,7 +181,7 @@ class CurationAPI {
 
         if (folder_index === null) {
             return axios.put(
-                `${HOST}/api/curations/folder/`, orders, JSONConfig()
+                `${HOST}/api/curations/folder`, orders, JSONConfig()
             )
         }
 
@@ -231,13 +231,13 @@ class CurationAPI {
 
         form.append("data", JSON.stringify(data))
         return axios.put(
-            `${HOST}/api/curations/folder/${folder.id}/`, form, MultipartConfig()
+            `${HOST}/api/curations/folder/${folder.id}`, form, MultipartConfig()
         )
     }
 
     deleteFolder = (folder_id) => {
         return axios.delete(
-            `${HOST}/api/curations/folder/${folder_id}/`, JSONConfig()
+            `${HOST}/api/curations/folder/${folder_id}`, JSONConfig()
         )
     }
 }

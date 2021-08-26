@@ -6,7 +6,7 @@ class AuthAPI {
         token
     ) => {
         return axios.post(
-            `${HOST}/api/token/verify/`, {
+            `${HOST}/api/token/verify`, {
             token: token,
         }, JSONConfig()
         )
@@ -16,7 +16,7 @@ class AuthAPI {
         token
     ) => {
         return axios.post(
-            `${HOST}/api/token/refresh/`, {
+            `${HOST}/api/token/refresh`, {
             token: token,
         }, JSONConfig()
         )
@@ -24,7 +24,7 @@ class AuthAPI {
 
     googleLogin = (token) => {
         return axios.post(
-            `${HOST}/api/users/rest-auth/google/editor/`, {
+            `${HOST}/api/users/rest-auth/google/editor`, {
             access_token: token,
         }, JSONConfig()
         )

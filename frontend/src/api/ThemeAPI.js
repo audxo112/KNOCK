@@ -12,14 +12,14 @@ class ThemeAPI {
         }
 
         return axios.get(
-            `${HOST}/api/themes/editor/`, JSONConfig(params)
+            `${HOST}/api/themes/editor`, JSONConfig(params)
         )
     }
 
     getRecentLinks = (
     ) => {
         return axios.get(
-            `${HOST}/api/themes/recent/links/`, JSONConfig()
+            `${HOST}/api/themes/recent/links`, JSONConfig()
         )
     }
 
@@ -83,7 +83,7 @@ class ThemeAPI {
         form.append("data", JSON.stringify(data))
 
         return axios.post(
-            `${HOST}/api/themes/upload/`, form, MultipartConfig()
+            `${HOST}/api/themes/upload`, form, MultipartConfig()
         )
     }
 
@@ -183,7 +183,7 @@ class ThemeAPI {
 
         form.append("data", JSON.stringify(data))
         return axios.put(
-            `${HOST}/api/themes/detail/${theme.id}/`, form, MultipartConfig()
+            `${HOST}/api/themes/detail/${theme.id}`, form, MultipartConfig()
         )
     }
 
@@ -191,7 +191,7 @@ class ThemeAPI {
         theme
     ) => {
         return axios.delete(
-            `${HOST}/api/themes/detail/${theme.id}/`, JSONConfig()
+            `${HOST}/api/themes/detail/${theme.id}`, JSONConfig()
         )
     }
 
@@ -199,7 +199,7 @@ class ThemeAPI {
         value
     ) => {
         return axios.get(
-            `${HOST}/api/themes/search/${value}/`, JSONConfig()
+            `${HOST}/api/themes/search/${value}`, JSONConfig()
         )
     }
 
@@ -207,7 +207,7 @@ class ThemeAPI {
         value
     ) => {
         return axios.get(
-            `${HOST}/api/themes/tags/search/${value}/`, JSONConfig()
+            `${HOST}/api/themes/tags/search/${value}`, JSONConfig()
         )
     }
 }

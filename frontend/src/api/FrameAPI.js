@@ -13,13 +13,13 @@ class FrameAPI {
         }
 
         return axios.get(
-            `${HOST}/api/frames/editor/`, JSONConfig(params)
+            `${HOST}/api/frames/editor`, JSONConfig(params)
         )
     }
 
     getMaxPriority = () => {
         return axios.get(
-            `${HOST}/api/frames/editor/max_priority/`, JSONConfig()
+            `${HOST}/api/frames/editor/max_priority`, JSONConfig()
         )
     }
 
@@ -68,7 +68,7 @@ class FrameAPI {
         form.append("data", JSON.stringify(data))
 
         return axios.post(
-            `${HOST}/api/frames/editor/`, form, MultipartConfig()
+            `${HOST}/api/frames/editor`, form, MultipartConfig()
         )
     }
 
@@ -152,7 +152,7 @@ class FrameAPI {
         form.append("data", JSON.stringify(data))
 
         return axios.put(
-            `${HOST}/api/frames/detail/${origin.id}/`, form, MultipartConfig()
+            `${HOST}/api/frames/detail/${origin.id}`, form, MultipartConfig()
         )
     }
 
@@ -172,7 +172,7 @@ class FrameAPI {
         }).toJS()
 
         return axios.put(
-            `${HOST}/api/frames/editor/`, orders, JSONConfig()
+            `${HOST}/api/frames/editor`, orders, JSONConfig()
         )
     }
 
@@ -180,7 +180,7 @@ class FrameAPI {
         frame_id
     ) => {
         return axios.delete(
-            `${HOST}/api/frames/detail/${frame_id}/`, JSONConfig()
+            `${HOST}/api/frames/detail/${frame_id}`, JSONConfig()
         )
     }
 }

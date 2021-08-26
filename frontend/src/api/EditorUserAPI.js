@@ -6,7 +6,7 @@ class EditorUserAPI {
     getUsers = (
     ) => {
         return axios.get(
-            `${HOST}/api/users/editor/`, JSONConfig()
+            `${HOST}/api/users/editor`, JSONConfig()
         )
     }
 
@@ -14,7 +14,7 @@ class EditorUserAPI {
         nickname
     ) => {
         return axios.get(
-            `${HOST}/api/users/nickname/check/${nickname}/`, JSONConfig()
+            `${HOST}/api/users/nickname/check/${nickname}`, JSONConfig()
         )
     }
 
@@ -46,7 +46,7 @@ class EditorUserAPI {
         form.append("data", JSON.stringify(data))
 
         return axios.post(
-            `${HOST}/api/users/editor/`, form, MultipartConfig()
+            `${HOST}/api/users/editor`, form, MultipartConfig()
         )
     }
 
@@ -97,7 +97,7 @@ class EditorUserAPI {
 
         form.append("data", JSON.stringify(data))
         return axios.put(
-            `${HOST}/api/users/edit/detail/${user.id}/`, form, MultipartConfig()
+            `${HOST}/api/users/edit/detail/${user.id}`, form, MultipartConfig()
         )
     }
 
@@ -113,7 +113,7 @@ class EditorUserAPI {
 
 
         return axios.put(
-            `${HOST}/api/users/edit/detail/${user_id}/`, form, MultipartConfig()
+            `${HOST}/api/users/edit/detail/${user_id}`, form, MultipartConfig()
         )
     }
 
@@ -121,14 +121,14 @@ class EditorUserAPI {
         value
     ) => {
         return axios.get(
-            `${HOST}/api/users/search/name-email/${value}/`, JSONConfig()
+            `${HOST}/api/users/search/name-email/${value}`, JSONConfig()
         )
     }
 
     getBanNicknames = (
     ) => {
         return axios.get(
-            `${HOST}/api/users/nickname/ban/`, JSONConfig()
+            `${HOST}/api/users/nickname/ban`, JSONConfig()
         )
     }
 
@@ -143,7 +143,7 @@ class EditorUserAPI {
             )
 
         return axios.post(
-            `${HOST}/api/users/nickname/ban/check/`, bans, JSONConfig()
+            `${HOST}/api/users/nickname/ban/check`, bans, JSONConfig()
         )
     }
 
@@ -163,7 +163,7 @@ class EditorUserAPI {
             )
 
         return axios.post(
-            `${HOST}/api/users/nickname/ban/`, bans, JSONConfig()
+            `${HOST}/api/users/nickname/ban`, bans, JSONConfig()
         )
     }
 
@@ -171,7 +171,7 @@ class EditorUserAPI {
         id
     ) => {
         return axios.delete(
-            `${HOST}/api/users/nickname/ban/delete/${id}/`, JSONConfig()
+            `${HOST}/api/users/nickname/ban/delete/${id}`, JSONConfig()
         )
     }
 }

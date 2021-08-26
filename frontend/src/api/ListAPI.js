@@ -10,7 +10,7 @@ class ListAPI {
         search = "",
     ) => {
         return axios.get(
-            `${HOST}/api/lists/themes/editor/`, {
+            `${HOST}/api/lists/themes/editor`, {
             params: {
                 group_id: group_id,
                 folder_id: folder_id,
@@ -27,7 +27,7 @@ class ListAPI {
         theme_id
     ) => {
         return axios.post(
-            `${HOST}/api/lists/themes/editor/`, {
+            `${HOST}/api/lists/themes/editor`, {
             group_id: group_id,
             folder_id: folder_id,
             theme_id: theme_id,
@@ -51,7 +51,7 @@ class ListAPI {
         }).toJS()
 
         return axios.put(
-            `${HOST}/api/lists/themes/editor/`, orders, JSONConfig()
+            `${HOST}/api/lists/themes/editor`, orders, JSONConfig()
         )
     }
 
@@ -59,7 +59,7 @@ class ListAPI {
         themeList_id,
     ) => {
         return axios.delete(
-            `${HOST}/api/lists/themes/editor/detail/${themeList_id}/`, JSONConfig(),
+            `${HOST}/api/lists/themes/editor/detail/${themeList_id}`, JSONConfig(),
         )
     }
 
