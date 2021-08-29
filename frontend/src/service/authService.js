@@ -14,6 +14,8 @@ export const googleLogin = (token) => {
     authAPI.googleLogin(
         token
     ).then(({ data, status }) => {
+
+        console.log(data)
         if (status === 204) {
             AuthActions.changeStatus(STATUS_NOT_AUTH)
             PopupActions.showMessage("존재하지 않는 계정입니다.")
@@ -89,6 +91,7 @@ export const verifyToken = () => {
         authAPI.verifyToken(
             token
         ).then(({ data }) => {
+            console.log(data)
             stopPageLoading()
 
             localStorage.setItem("token", data.token)

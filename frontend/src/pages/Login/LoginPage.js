@@ -9,6 +9,7 @@ import { STATUS_LOADING } from "const/auth"
 
 class LoginPage extends Component {
     handleSuccess = (result) => {
+        console.log(result)
         googleLogin(result.accessToken)
     }
 
