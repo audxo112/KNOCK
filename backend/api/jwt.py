@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework_jwt.settings import api_settings
 
 from users.models import User
+from users.serializers import UserSerializer
 
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
@@ -41,7 +42,7 @@ def jwt_response_payload_handler(token, user=None, request=None):
         user.save()
     return {
         "token": token,
-        "user": user,
+        "user": UserSerializer(data=user).data,
     }
 
 
