@@ -42,7 +42,7 @@ def jwt_response_payload_handler(token, user=None, request=None):
         user.save()
     return {
         "token": token,
-        "user": UserSerializer(data=user).initial_data,
+        "user": UserSerializer(user).data,
     }
 
 
