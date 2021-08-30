@@ -83,9 +83,11 @@ class JWTBaseSerializer(Serializer):
         try:
             payload = jwt_decode_handler(token)
         except jwt.ExpiredSignature:
+            print("Signature has expired.")
             msg = _("Signature has expired.")
             raise serializers.ValidationError(msg)
         except jwt.DecodeError:
+            print("Error decoding signature.")
             msg = _("Error decoding signature.")
             raise serializers.ValidationError(msg)
 
@@ -102,14 +104,17 @@ class JWTBaseSerializer(Serializer):
             user = User.objects.get(username=username)
         except User.DoesNotExist:
             msg = _("User doesn't exist.")
+            print("User doesn't exist.")
             raise serializers.ValidationError(msg)
 
         if not user.is_active:
             msg = _("User account is disabled.")
+            print("User account is disabled.")
             raise serializers.ValidationError(msg)
 
         if user.login_token != payload.get("login_token"):
             msg = _("Invalid user info")
+            print("Invalid user info")
             raise serializers.ValidationError(msg)
 
         return user
@@ -160,6 +165,8 @@ class RefreshJWTSerializer(JWTBaseSerializer):
     def validate(self, attrs):
         token = attrs["token"]
 
+        print(token)
+
         payload = self._check_payload(token)
         user = self._check_user(payload)
 
@@ -167,6 +174,7 @@ class RefreshJWTSerializer(JWTBaseSerializer):
 
         if not orig_iat:
             msg = _("Not allow refresh")
+            print("Not allow refresh")
             raise serializers.ValidationError(msg)
 
         refresh_limit = api_settings.JWT_REFRESH_EXPIRATION_DELTA
@@ -178,6 +186,7 @@ class RefreshJWTSerializer(JWTBaseSerializer):
 
         if now_timestamp > expiration_timestamp:
             msg = _("Refresh has expired.")
+            print("Refresh has expired.")
             raise serializers.ValidationError(msg)
 
         new_payload = jwt_payload_handler(user)
