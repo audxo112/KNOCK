@@ -224,18 +224,21 @@ class ThemeListPage extends Component {
     handleCancelShowSearch = () => {
         const { themes } = this.props
 
-        for (let i = 0; i < themes.size; i++) {
-            var theme = themes.get(i)
+        themes.keySeq().forEach(k => {
+            var list = themes.get(k)
+            list.forEach(t => {
+                console.log(t)
 
-            const form = new FormData()
-            const data = {
-                "is_allow_download": true
-            }
-            form.append("data", JSON.stringify(data))
-            axios.put(
-                `${HOST}/api/themes/detail/${theme.id}`, form, MultipartConfig()
-            )
-        }
+                const form = new FormData()
+                const data = {
+                    "is_allow_download": true
+                }
+                form.append("data", JSON.stringify(data))
+                axios.put(
+                    `${HOST}/api/themes/detail/${t.id}`, form, MultipartConfig()
+                )
+            })
+        })
 
         // ThemeListActions.changeShowSearch(false)
     }

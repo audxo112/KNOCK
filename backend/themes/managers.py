@@ -8,6 +8,9 @@ class ThemeManager(managers.CustomManager):
 
         instance.title = kwargs.get("title", instance.title)
         instance.link = kwargs.get("link", instance.link)
+        instance.is_allow_download = kwargs.get(
+            "is_allow_download", instance.is_allow_download
+        )
         instance.is_verified = kwargs.get("is_verified", instance.is_verified)
         instance.is_pending = kwargs.get("is_pending", instance.is_pending)
         instance.is_public = kwargs.get("is_public", instance.is_public)
