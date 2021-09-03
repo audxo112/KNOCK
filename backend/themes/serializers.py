@@ -85,6 +85,7 @@ class ThemeSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "link",
+            "is_allow_download",
             "is_verified",
             "is_pending",
             "is_public",

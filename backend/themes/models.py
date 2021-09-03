@@ -9,6 +9,11 @@ class Theme(core_models.FleetRandomIDModels):
 
     title = models.CharField(_("제목"), max_length=50)
     link = models.URLField(_("링크"), max_length=300, blank=True)
+    is_allow_download = models.BooleanField(
+        _("다운로드허용"),
+        default=False,
+        help_text=_("에디터가 검증한 여부, 에디터가 올린 테마는 기본값 True"),
+    )
     is_verified = models.BooleanField(
         _("검증 여부"),
         default=False,
