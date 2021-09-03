@@ -23,6 +23,8 @@ import {
 import { themeAPI, editorUserAPI } from "api";
 import { PAGE_THEME_DETAIL, PAGE_THEME_LIST } from "const/page"
 
+import axios from "axios"
+import { HOST, JSONConfig, MultipartConfig, thumbnailToItem, preloadContentToItem } from "./apiBase"
 
 class ThemeListPage extends Component {
     lastElementRef = React.createRef()
@@ -220,7 +222,22 @@ class ThemeListPage extends Component {
     }
 
     handleCancelShowSearch = () => {
-        ThemeListActions.changeShowSearch(false)
+        const { themes } = this.props
+
+        for (let i = 0; i < themes.size; i++) {
+            var theme = themes.get(i)
+
+            const form = new FormData()
+            const data = {
+                "is_allow_download": true
+            }
+            form.append("data", JSON.stringify(data))
+            axios.put(
+                `${HOST}/api/themes/detail/${theme.id}`, form, MultipartConfig()
+            )
+        }
+
+        // ThemeListActions.changeShowSearch(false)
     }
 
     digitToHex = (val) => {
