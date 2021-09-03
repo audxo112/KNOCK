@@ -728,13 +728,13 @@ export default connect(
                 theme.post_end !== origin.post_end
             )
 
+            const update_allow_download = theme.is_allow_download !== origin.is_allow_download
+
             const valid_thumbnail = (
                 theme.origin_thumbnail.image !== "" &&
                 theme.default_thumbnail.image !== "" &&
                 theme.mini_thumbnail.image !== ""
             )
-
-            console.log(theme.origin_thumbnail.toJS())
 
             const valid_content = (
                 (
@@ -780,6 +780,7 @@ export default connect(
                     update_tag ||
                     update_link ||
                     update_post ||
+                    update_allow_download ||
                     update_thumbnail ||
                     update_content
                 )

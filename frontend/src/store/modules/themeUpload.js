@@ -112,7 +112,7 @@ const ThemeRecord = Record({
     title: "",
     tags: List([]),
     link: "",
-    is_allow_download: false,
+    is_allow_download: true,
     group: null,
     folder: null,
     dominant_color: "#000000",
