@@ -35,7 +35,7 @@ class ThemeList(APIView, RandomMixin):
             owner__upload_stop_period__lte=datetime.now(),
             post_start_datetime__lte=datetime.now(),
             post_end_datetime__gte=datetime.now(),
-        )
+        ).order_by("-created")
 
         paginator = Paginator(theme_list, offset)
 
