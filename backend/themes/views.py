@@ -5,7 +5,6 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage
 from rest_framework import status
 from rest_framework.permissions import AllowAny
-from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . import models, serializers
@@ -20,7 +19,15 @@ class ThemeList(APIView, RandomMixin):
         page = request.GET.get("page", 1)
         offset = request.GET.get("offset", 20)
 
-        self.apply_random(page)
+        # self.apply_random(page)
+
+        # theme_list = models.Theme.objects.filter(
+        #     is_pending=False,
+        #     is_public=True,
+        #     owner__upload_stop_period__lte=datetime.now(),
+        #     post_start_datetime__lte=datetime.now(),
+        #     post_end_datetime__gte=datetime.now(),
+        # ).order_by("?")
 
         theme_list = models.Theme.objects.filter(
             is_pending=False,
@@ -28,7 +35,7 @@ class ThemeList(APIView, RandomMixin):
             owner__upload_stop_period__lte=datetime.now(),
             post_start_datetime__lte=datetime.now(),
             post_end_datetime__gte=datetime.now(),
-        ).order_by("?")
+        )
 
         paginator = Paginator(theme_list, offset)
 
