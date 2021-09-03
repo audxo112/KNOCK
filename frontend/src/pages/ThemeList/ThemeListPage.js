@@ -24,7 +24,7 @@ import { themeAPI, editorUserAPI } from "api";
 import { PAGE_THEME_DETAIL, PAGE_THEME_LIST } from "const/page"
 
 import axios from "axios"
-import { HOST, JSONConfig, MultipartConfig, thumbnailToItem, preloadContentToItem } from "./apiBase"
+import { HOST, JSONConfig, MultipartConfig, thumbnailToItem, preloadContentToItem } from "api/apiBase"
 
 class ThemeListPage extends Component {
     lastElementRef = React.createRef()
