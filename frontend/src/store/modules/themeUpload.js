@@ -23,6 +23,8 @@ const SELECT_FOLDER = "themeUpload/SELECT_FOLDER"
 const CHANGE_POST_START = "themeUpload/CHANGE_POST_START"
 const CHANGE_POST_END = "themeUpload/CHANGE_POST_END"
 
+const CHANGE_ALLOW_DOWNLOAD = "themeUpload/CHANGE_ALLOW_DOWNLOAD"
+
 const CHANGE_DOMINANT_COLOR = "themeUpload/CHANGE_DOMINANT_COLOR"
 const LOAD_CONTENT = "themeUpload/LOAD_CONTENT"
 const SET_LARGE_PRELOAD = "themeUpload/SET_LARGE_PRELOAD"
@@ -56,6 +58,8 @@ export const selectFolder = createAction(SELECT_FOLDER)
 
 export const changePostStart = createAction(CHANGE_POST_START)
 export const changePostEnd = createAction(CHANGE_POST_END)
+
+export const changeAllowDownload = createAction(CHANGE_ALLOW_DOWNLOAD)
 
 export const changeDominantColor = createAction(CHANGE_DOMINANT_COLOR)
 export const loadContent = createAction(LOAD_CONTENT)
@@ -108,6 +112,7 @@ const ThemeRecord = Record({
     title: "",
     tags: List([]),
     link: "",
+    is_allow_download: false,
     group: null,
     folder: null,
     dominant_color: "#000000",
@@ -278,6 +283,9 @@ export default handleActions({
     },
     [CHANGE_POST_END]: (state, { payload: post_end }) => {
         return state.setIn(["theme", "post_end"], post_end)
+    },
+    [CHANGE_ALLOW_DOWNLOAD]: (state, { payload: is_allow_download }) => {
+        return state.setIn(["theme", "is_allow_download"], is_allow_download)
     },
     [CHANGE_DOMINANT_COLOR]: (state, { payload: color }) => {
         return state.setIn(["theme", "dominant_color"], color)

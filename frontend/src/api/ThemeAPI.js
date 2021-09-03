@@ -50,6 +50,7 @@ class ThemeAPI {
             dominant_color: theme.dominant_color,
             tags: tags,
             link: theme.link,
+            is_allow_download: theme.is_allow_download,
             owner_id: theme.user.id,
             post_start_datetime: `${theme.post_start}T09:00:00.0`,
             post_end_datetime: `${theme.post_end}T09:00:00.0`,
@@ -135,6 +136,9 @@ class ThemeAPI {
         }
         if (theme.link !== origin.link) {
             data["link"] = theme.link
+        }
+        if (theme.is_allow_download !== origin.is_allow_download) {
+            data["is_allow_download"] = theme.is_allow_download
         }
         if (theme.user.id !== origin.user.id) {
             data["owner_id"] = theme.user.id

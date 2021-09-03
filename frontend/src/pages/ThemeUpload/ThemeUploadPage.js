@@ -9,6 +9,7 @@ import SuggestTextInput from "components/SuggestTextInput";
 import DatePeriod from "components/DatePeriod"
 import Tag from "components/Tag"
 import ContentView from "components/ContentView";
+import Switch from "components/Switch"
 import { CurationSelector } from "components/Curation";
 
 import {
@@ -311,6 +312,10 @@ class ThemeUploadPage extends Component {
         ThemeUploadActions.changePostEnd(value)
     }
 
+    handleAllowDownloadChange = (value) => {
+        ThemeUploadActions.changeAllowDownload(value)
+    }
+
     componentDidMount() {
         this.loadUsers()
         this.loadRecentLinks()
@@ -391,6 +396,12 @@ class ThemeUploadPage extends Component {
                         curations={curations}
                         onGroupSelected={this.handleGroupOnSelected}
                         onFolderSelected={this.handleFolderOnSelected} />
+                }
+                allowDownload={
+                    <Switch
+                        label="다운로드 허용"
+                        value={theme.is_allow_download}
+                        onChange={this.handleAllowDownloadChange} />
                 }
                 thumbnailImage={
                     <ContentView

@@ -36,6 +36,8 @@ const SET_RECENT_LINKS = "themeList/SET_RECENT_LINKS"
 const CHANGE_POST_START = "themeList/CHANGE_POST_START"
 const CHANGE_POST_END = "themeList/CHANGE_POST_END"
 
+const CHANGE_ALLOW_DOWNLOAD = "themeList/CHANGE_ALLOW_DOWNLOAD"
+
 const CHANGE_DOMINANT_COLOR = "themeList/CHANGE_DOMINANT_COLOR"
 const LOAD_CONTENT = "themeList/LOAD_CONTENT"
 const SET_LARGE_PRELOAD = "themeList/SET_LARGE_PRELOAD"
@@ -80,6 +82,8 @@ export const setRecentLinks = createAction(SET_RECENT_LINKS)
 
 export const changePostStart = createAction(CHANGE_POST_START)
 export const changePostEnd = createAction(CHANGE_POST_END)
+
+export const changeAllowDownload = createAction(CHANGE_ALLOW_DOWNLOAD)
 
 export const changeDominantColor = createAction(CHANGE_DOMINANT_COLOR)
 export const loadContent = createAction(LOAD_CONTENT)
@@ -135,6 +139,7 @@ const ThemeRecord = Record({
     dominant_color: "#000000",
     tags: List([]),
     link: "",
+    is_allow_download: false,
     post_start: dateToStr(new Date()),
     post_end: dateToStr(new Date(), 20),
     origin_thumbnail: ImageRecord(),
@@ -229,6 +234,7 @@ const itemToTheme = (theme) => {
         dominant_color: theme.dominant_color,
         tags: itemsToTags(theme.tags),
         link: theme.link,
+        is_allow_download: theme.is_allow_download,
         post_start: theme.post_start_datetime,
         post_end: theme.post_end_datetime,
         origin_thumbnail: itemToThumbnail(theme.origin_thumbnail),
@@ -513,6 +519,9 @@ export default handleActions({
     },
     [CHANGE_POST_END]: (state, { payload: post_end }) => {
         return state.setIn(["theme", "post_end"], post_end)
+    },
+    [CHANGE_ALLOW_DOWNLOAD]: (state, { payload: is_allow_download }) => {
+        return state.setIn(["theme", "is_allow_download"], is_allow_download)
     },
     [CHANGE_DOMINANT_COLOR]: (state, { payload: color }) => {
         return state.setIn(["theme", "dominant_color"], color)

@@ -304,6 +304,10 @@ class ThemeListPage extends Component {
         ThemeListActions.changePostEnd(value)
     }
 
+    handleAllowDownloadChange = (value) => {
+        ThemeListActions.changeAllowDownload(value)
+    }
+
     _captureImage = (image, width, height, multi = true) => {
         if (!image) return
 
@@ -616,6 +620,12 @@ class ThemeListPage extends Component {
                         endDateValue={theme.post_end}
                         onStartChange={this.handleStartDateChange}
                         onEndChange={this.handleEndDateChange} />
+                }
+                allowDownload={
+                    <Switch
+                        label="다운로드 허용"
+                        value={theme.is_allow_download}
+                        onChange={this.handleAllowDownloadChange} />
                 }
                 thumbnailImage={
                     <ContentView

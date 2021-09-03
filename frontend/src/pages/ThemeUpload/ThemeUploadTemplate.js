@@ -11,6 +11,7 @@ const ThemeUploadTemplate = ({
     tagInput,
     linkInput,
     postPeriod,
+    allowDownload,
     curationSelector,
     thumbnailImage,
     captureBtn,
@@ -47,6 +48,9 @@ const ThemeUploadTemplate = ({
                     </div>
                     <div className={cx("post-period-pos")}>
                         {postPeriod}
+                    </div>
+                    <div className={cx("allow-download-pos")}>
+                        {allowDownload}
                     </div>
                 </div>
 

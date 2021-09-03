@@ -13,6 +13,7 @@ const ThemeItemTemplate = ({
     tagInput,
     linkInput,
     postPeriod,
+    allowDownload,
     thumbnailImage,
     captureBtn,
     largeVideo,
@@ -50,6 +51,9 @@ const ThemeItemTemplate = ({
                     </div>
                     <div className={cx("post-period-pos")}>
                         {postPeriod}
+                    </div>
+                    <div className={cx("allow-download-pos")}>
+                        {allowDownload}
                     </div>
                 </div>
 
