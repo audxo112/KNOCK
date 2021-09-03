@@ -10,6 +10,7 @@ import { ThemeList } from "components/Theme"
 import { UserSelector } from "components/User"
 import SuggestTextInput from "components/SuggestTextInput";
 import DatePeriod from "components/DatePeriod"
+import Switch from "components/Switch"
 import Tag from "components/Tag"
 import ContentView from "components/ContentView";
 
